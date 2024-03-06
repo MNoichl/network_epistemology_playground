@@ -1,1 +1,1 @@
-# network_epistemology_playground
+# Playground for investigeting transient diversity in realisti networks
