@@ -80,7 +80,7 @@ class Model:
     def agents_update(self):
         for agent in self.agents:
             # gather information from neighbors
-            neighbor_nodes = list(self.network.neighbors(agent.id))
+            neighbor_nodes = list(self.network.neighbors(agent.id)) 
             neighbor_agents = [self.agents[x] for x in neighbor_nodes]
             total_success = agent.n_success
             total_experiments = agent.n_experiments
