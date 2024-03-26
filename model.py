@@ -1,6 +1,7 @@
 import numpy as np
 
 from agent import Agent, BetaAgent
+import tqdm
 
 
 class Model:
@@ -42,7 +43,7 @@ class Model:
         self.agents_experiment()
         self.agents_update()
 
-    def simulation(self, number_of_steps: int = 10**6):
+    def simulation(self, number_of_steps: int = 10**6, show_bar: bool = False):
         """Runs a simulation of the model.
 
         Args:
@@ -57,8 +58,12 @@ class Model:
             if np.allclose(credences_prior, credences_post):
                 return True
             return False
+        iterable = range(number_of_steps)
+        
+        if show_bar:
+            iterable = tqdm(iterable)
 
-        for _ in range(number_of_steps):
+        for _ in iterable:
             credences_prior = np.array([agent.credence for agent in self.agents])
             self.step()
             credences_post = np.array([agent.credence for agent in self.agents])
