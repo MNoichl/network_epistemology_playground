@@ -1,7 +1,9 @@
 import numpy as np
+import tqdm
+
 
 from agent import Agent, BetaAgent
-import tqdm
+
 
 
 class Model:
@@ -61,7 +63,7 @@ class Model:
         iterable = range(number_of_steps)
         
         if show_bar:
-            iterable = tqdm(iterable)
+            iterable = tqdm.tqdm_notebook(iterable)
 
         for _ in iterable:
             credences_prior = np.array([agent.credence for agent in self.agents])
