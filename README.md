@@ -1,1 +1,1 @@
-# Playground for investigeting transient diversity in realistic networks
+# Playground for investigating transient diversity in realistic networks
