@@ -1,2 +1,2 @@
-* Change updating to beta-sitributions
+* Change updating to beta-distributions
 * assymmetry in experimental behaviour

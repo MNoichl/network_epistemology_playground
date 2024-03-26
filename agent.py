@@ -118,7 +118,7 @@ class BetaAgent(Agent):
 
     def __init__(self, id):
         Agent.__init__(self, id)
-        self.alpha: int = rd.randint(0, 4)
+        self.alpha: int = rd.randint(0, 4) #Why are these integers? (MN)
         self.beta: int = rd.randint(0, 4)
         if (self.alpha, self.beta) == (0, 0):
             self.credence = 0.5
