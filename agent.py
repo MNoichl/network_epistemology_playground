@@ -144,6 +144,8 @@ class BetaAgent:
     def __init__(self, id, n_theories):
         self.id = id
         self.n_theories = n_theories
+        if n_theories is None:
+            self.n_theories = 2
         self.beliefs: np.array = np.array(
             [[rd.random(), rd.random()] for _ in range(n_theories)]
         )
