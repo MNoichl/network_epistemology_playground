@@ -48,23 +48,29 @@ def test_bayes_update():
 
 
 def test_beta_update():
-    agent = BetaAgent(1)
-    agent.alpha = 0
-    agent.beta = 0
-    agent.beta_update(n_experiments=4, n_success=1, uncertainty=0.1)
-    assert agent.alpha == 1
-    assert agent.beta == 3
-    assert agent.credence == 0.25
+    agent = BetaAgent(1, n_theories=2)
+    agent.beliefs = [[0, 0], [0, 0]]
+    agent.beta_update([[1, 4], [0, 0]])
+    assert agent.beliefs[0] == [1, 3]
 
-    agent.beta_update(n_success=11, n_experiments=16, uncertainty=0.1)
-    assert agent.alpha == 12
-    assert agent.beta == 8
-    assert agent.credence == 0.6
+    agent.beta_update([[11, 16], [0, 0]])
+    assert agent.beliefs[0] == [12, 8]
 
-    agent.beta_update(n_success=32, n_experiments=64, uncertainty=0.4)
-    assert agent.alpha == 44
-    assert agent.beta == 40
-    assert round(agent.credence, 2) == 0.52
+    agent.beta_update([[32, 64], [1, 2]])
+    assert agent.beliefs[0] == [44, 40]
+    assert agent.beliefs[1] == [1, 1]
+
+
+def test_experiment_beta():
+    agent = BetaAgent(1, n_theories=2)
+    agent.experiment(n_experiments=100, p_theories=[0.6, 0.7])
+    assert (agent.experiment_result != 0).any()
+    assert (agent.experiment_result == 100).any()
+
+    agent.beliefs = [[3, 3], [0, 3]]
+    agent.experiment(n_experiments=100, p_theories=[0.6, 0.7])
+    assert (agent.experiment_result[1] == [0, 0]).all()
+    assert agent.experiment_result[0][1] == 100
 
 
 def test_jeffrey_update():
