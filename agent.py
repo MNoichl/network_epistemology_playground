@@ -1,3 +1,4 @@
+import numpy as np
 import numpy.random as rd
 
 
@@ -50,7 +51,10 @@ class Agent:
 
     def bayes_update(self, n_success, n_experiments, uncertainty):
         """
-        Updates the agent's credence using Bayes' rule.
+        Updates the agent's credence using Bayes' rule. The basic setting is that the
+        agent knows the probability of an old theory but does not know the probability
+        of a new theory. The probability of the new theory is assumed to be either
+        0.5 + uncertainty or 0.5 - uncertainty.
 
         Args:
         - n_success (int): The number of successful experiments.
@@ -108,43 +112,83 @@ class Agent:
         )  # Jeffrey's Rule # P'(H) = P(H|E) P'(E) + P(H|~E) P'(~E)#
 
 
-class BetaAgent(Agent):
+class BetaAgent:
     """Inspired by Zollman, Kevin J. S. 2010. The Epistemic Benefit of Transient
     Diversity. Erkenntnis 72 (1): 17--35. https://doi.org/10.1007/s10670-009-9194-6.
     (Especially sections 2 and 3.)
 
-    Todo (Hein): I'm not sure whether we should use one pair (alpha,beta) or
-    two pairs (alpha_i,beta_i)."""
+    Attributes:
+    - id: The id of the BetaAgent
+    - beliefs (np.array): The beliefs of the agent. Each index of the array represents a
+    theory and contains an array the form [alpha (float), beta (float)]
+    representing the beta-distribution that models the agent's beliefs about that
+    theory.
+    - experiment_result (np.array): The result of the agent's last experiment.
+    Each index of the array represents a theory and contains an array of the form
+    [n_success (int), n_experiments (int)] representing the result of the experiment on
+    that theory, if any. If there is no experiment on a given theory, then the result of
+    the experiment on that theory is [0, 0].
 
-    def __init__(self, id):
-        Agent.__init__(self, id)
-        self.alpha: int = rd.randint(0, 4) #Why are these integers? (MN)
-        self.beta: int = rd.randint(0, 4)
-        if (self.alpha, self.beta) == (0, 0):
-            self.credence = 0.5
-        else:
-            self.credence: float = self.alpha / (self.alpha + self.beta)
+    Methods:
+    - __init__(self): Initializes the BetaAgent object.
+    - __str__(self): Returns a string representation of the BetaAgent object.
+    - n_theories (int): The number of theories under consideration.
+    - experiment(self, n_experiments, p_theories): Performs an experiment and updates
+    the agent's experiment_result.
+    - beta_update(self, experiment_results): Updates the agent's beliefs on the basis of
+    experiments. Experiments are represented by an array, where each index of the array
+    represents a theory and contains an array of the form [n_success (int),
+    n_experiments (int)] representing the result of the experiments.
+    """
+
+    def __init__(self, id, n_theories):
+        self.id = id
+        self.n_theories = n_theories
+        self.beliefs: np.array = np.array(
+            [[rd.random(), rd.random()] for _ in range(n_theories)]
+        )
+        self.experiment_result: np.array = np.array([[0, 0] for _ in range(n_theories)])
 
     def __str__(self):
         return (
-            f"credence = {round(self.credence, 2)}, n_success = {self.n_success},"
-            f"n_experiments = {self.n_experiments}, alpha = {self.alpha},"
-            f"beta = {self.beta}"
+            # f"credence = {round(self.credence, 2)}, n_success = {self.n_success},"
+            # f"n_experiments = {self.n_experiments}, alpha = {self.alpha},"
+            # f"beta = {self.beta}"
         )
 
-    def beta_update(self, n_success, n_experiments, uncertainty):
-        """
-        Updates the agent's beta distribution and credence.
+    def experiment(self, n_experiments: int, p_theories: np.array):
+        """Performs an experiment and updates the agent's experiment_result.
 
         Args:
-        - n_success (int): The number of successful experiments.
-        - n_experiments: The total number of experiments.
-        - uncertainty (float): The uncertainty in the experiment.
+        - n_experiments (int): The number of experiments.
+        - p_theories (np.array): The probabilities of success, one for each theory."""
+        # Reset experiment_result
+        self.experiment_result = np.array([[0, 0] for _ in range(self.n_theories)])
+
+        # Decide which theory to experiment on
+        credences = np.array(
+            [
+                self.beliefs[theory_id][0]
+                / (self.beliefs[theory_id][0] + self.beliefs[theory_id][1])
+                for theory_id in range(self.n_theories)
+            ]
+        )
+        experiment_theory_id = rd.choice(np.flatnonzero(credences == np.max(credences)))
+
+        # Perform experiment on that theory and update experiment_result
+        n_success = rd.binomial(n_experiments, p_theories[experiment_theory_id])
+        self.experiment_result[experiment_theory_id] = [n_success, n_experiments]
+
+    def beta_update(self, experiment_results):
+        """Updates the agent's beliefs based on experiment_results.
+
+        Args:
+        - experiment_results (np.array): An array representing the results from
+        experiments represented in an array.
         """
-        # Todo (Hein): Note that this update does not depend on uncertainty
-        # whereas the bayes_update above does. Did we make a mistake?
-        n_failures = n_experiments - n_success
-        self.alpha += n_success
-        self.beta += n_failures
-        if n_experiments > 0:
-            self.credence = self.alpha / (self.alpha + self.beta)
+        for theory in range(self.n_theories):
+            n_success = experiment_results[theory][0]
+            n_experiments = experiment_results[theory][1]
+            n_failures = n_experiments - n_success
+            self.beliefs[theory][0] += n_success
+            self.beliefs[theory][1] += n_failures
