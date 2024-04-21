@@ -54,12 +54,15 @@ class Model:
             (it will end sooner if the stop condition is met). Defaults to 10**6."""
 
         def stop_condition(credences_prior, credences_post) -> bool:
-            # if np.all((credences_post < 0.5) or (credences_post > 0.99)):
             if np.all(credences_post < 0.5) or np.all(credences_post > 0.99):
                 return True
-            # if np.allclose(credences_prior, credences_post):
-            #     return True
             return False
+
+        def alternative_stop_condition(credences_prior, credences_post) -> bool:
+            return np.allclose(credences_prior, credences_post)
+
+        def true_consensus_condition(credences: np.array) -> bool:
+            return np.all(credences > 0.5)
 
         iterable = range(number_of_steps)
 
@@ -73,17 +76,19 @@ class Model:
             self.step()
             credences_post = np.array([agent.credence for agent in self.agents])
             if not alternative_stop:
-                if np.allclose(credences_prior, credences_post):
+                if alternative_stop_condition(credences_prior, credences_post):
                     alternative_stop = True
-                    self.conclusion_alternative_stop = np.all(credences_post > 0.99)
+                    self.conclusion_alternative_stop = true_consensus_condition(
+                        credences_post
+                    )
             if stop_condition(credences_prior, credences_post):
+                self.conclusion = true_consensus_condition(credences_post)
+                if not alternative_stop:
+                    self.conclusion_alternative_stop = self.conclusion
                 break
-        self.conclusion = np.all(credences_post > 0.99)
-        if not alternative_stop:
-            self.conclusion_alternative_stop = self.conclusion
 
     def step(self):
-        """Updates the model with one step, consisting of experiments and updates"""
+        """Updates the model with one step, consisting of experiments and updates."""
         self.agents_experiment()
         self.agents_update()
 
