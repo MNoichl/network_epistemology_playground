@@ -2,13 +2,41 @@ import numpy as np
 import numpy.random as rd
 
 
-class Agent:
+class UncertaintyProblem:
     """
-    Adapted from https://github.com/jweisber/sep-sen/blob/master/bg/agent.py
-    Represents an agent in a network epistemology playground.
+    The problem of theory choice involves two theories where the new_theory is better
+    by the margin of uncertainty.
 
     Attributes:
-    - credence (float): The agent's initial credence.
+    - uncertainty (float): The uncertainty in the theory choice.
+
+    Methods
+    - experiment(self, n_experiments): Performs an experiment using the new_theory.
+    """
+
+    def __init__(self, uncertainty: float = 0.001) -> None:
+        self.uncertainty = uncertainty
+        self.p_old_theory = 0.5
+        self.p_new_theory = 0.5 + uncertainty
+
+    def experiment(self, n_experiments: int):
+        """
+        Performs an experiment using the new_theory.
+
+        Args:
+        - n_experiments (int): the number of experiments.
+        """
+        n_success = rd.binomial(n_experiments, self.p_new_theory)
+        return n_success, n_experiments
+
+
+class Agent:
+    """
+    An agent in a network epistemology playground, either Bayesian or Jeffreyan.
+    Adapted from https://github.com/jweisber/sep-sen/blob/master/bg/agent.py
+
+    Attributes:
+    - credence (float): The agent's initial credence that the new theory is better.
     - n_success (int): The number of successful experiments.
     - n_experiments (int): The total number of experiments.
 
@@ -18,12 +46,13 @@ class Agent:
     - experiment(self, n_experiments, uncertainty): Performs an experiment.
     - bayes_update(self, n_success, n_experiments, uncertainty): Updates the agent's
     credence using Bayes' rule.
-    - jeffrey_update(self, neighbor, uncertainty, m): Updates the agent's credence
-    using Jeffrey's rule.
+    - jeffrey_update(self, neighbor, uncertainty, mistrust_rate): Updates the agent's
+    credence using Jeffrey's rule.
     """
 
-    def __init__(self, id):
+    def __init__(self, id, uncertainty_problem: UncertaintyProblem):
         self.id = id
+        self.uncertainty_problem = uncertainty_problem
         self.credence: float = rd.uniform(0, 1)
         self.n_success: int = 0
         self.n_experiments: int = 0
@@ -34,7 +63,7 @@ class Agent:
             f"n_experiments = {self.n_experiments}"
         )
 
-    def experiment(self, n_experiments: int, uncertainty: float):
+    def experiment(self, n_experiments: int):
         """
         Performs an experiment with the given parameters.
 
@@ -43,13 +72,14 @@ class Agent:
         - uncertainty (float): The uncertainty in the experiment.
         """
         if self.credence > 0.5:
-            self.n_success = rd.binomial(n_experiments, 0.5 + uncertainty)
-            self.n_experiments = n_experiments
+            self.n_success, self.n_experiments = self.uncertainty_problem.experiment(
+                n_experiments
+            )
         else:
             self.n_success = 0
             self.n_experiments = 0
 
-    def bayes_update(self, n_success, n_experiments, uncertainty):
+    def bayes_update(self, n_success, n_experiments):
         """
         Updates the agent's credence using Bayes' rule. The basic setting is that the
         agent knows the probability of an old theory but does not know the probability
@@ -59,10 +89,9 @@ class Agent:
         Args:
         - n_success (int): The number of successful experiments.
         - n_experiments: The total number of experiments.
-        - uncertainty (float): The uncertainty in the experiment.
         """
-        p_new_better = 0.5 + uncertainty
-        p_new_worse = 0.5 - uncertainty
+        p_new_better = 0.5 + self.uncertainty_problem.uncertainty
+        p_new_worse = 0.5 - self.uncertainty_problem.uncertainty
         n_failures = n_experiments - n_success
         credence_new_worse = 1 - self.credence
         likelihood_ratio_credence = credence_new_worse / self.credence
@@ -73,43 +102,70 @@ class Agent:
             1 + likelihood_ratio_credence * likelihood_ratio_evidence_given_probability
         )
 
-    def jeffrey_update(self, neighbor, uncertainty, strength_update):
+    def jeffrey_update(self, neighbor, uncertainty, mistrust_rate):
         """
         Updates the agent's credence using Jeffrey's rule.
 
         Args:
         - neighbor (Agent): An Agent object representing the neighbor agent.
         - uncertainty (float): The uncertainty in the experiment.
-        - strength_update (float): The strength of the update.
+        - mistrust_rate (float): The rate at which difference of opinion increases
+        discounting.
         """
         # Todo (Hein): understand the update and refactor with sensible variable names
-        n = neighbor.n
-        k = neighbor.k
+        n_experiments = neighbor.n_experiment
+        n_success = neighbor.n_success
+        n_failures = n_experiments - n_success
 
-        p_E_H = (0.5 + uncertainty) ** k * (0.5 - uncertainty) ** (
-            n - k
+        p_success_given_new_better = 0.5 + uncertainty
+        p_E_given_new_better = (
+            p_success_given_new_better**n_success
+            * (1 - p_success_given_new_better) ** n_failures
         )  # P(E|H)  = p^k (1-p)^(n-k)
-        p_E_nH = (0.5 - uncertainty) ** k * (0.5 + uncertainty) ** (
-            n - k
+        p_success_given_new_worse = 0.5 - uncertainty
+        p_E_given_new_worse = (
+            p_success_given_new_worse**n_success
+            * (1 - p_success_given_new_worse) ** n_failures
         )  # P(E|~H) = (1-p)^k p^(n-k)
         p_E = (
-            self.credence * p_E_H + (1 - self.credence) * p_E_nH
-        )  # P(E) = P(E|H) P(E) + P(E|~H) P(~H)
+            self.credence * p_E_given_new_better
+            + (1 - self.credence) * p_E_given_new_worse
+        )  # P(E) = P(E|H) P(H) + P(E|~H) P(~H)
 
-        p_H_E = self.credence * p_E_H / p_E  # P(H|E)  = P(H) P(E|H)  / P(E)
-        p_H_nE = (
-            self.credence * (1 - p_E_H) / (1 - p_E)
+        p_new_better_given_E = (
+            self.credence * p_E_given_new_better / p_E
+        )  # P(H|E)  = P(H) P(E|H)  / P(E)
+        p_new_worse_given_E = (
+            self.credence * (1 - p_E_given_new_better) / (1 - p_E)
         )  # P(H|~E) = P(H) P(~E|H) / P(~E)
 
-        # q_E = max(1 - abs(self.credence - neighbor.credence) * m * (1 - p_E), 0)
+        # p_post_E = max(1 - abs(self.credence - neighbor.credence) * mistrust_rate *
+        # (1 - p_E), 0)
         # O&W's Eq. 1 (anti-updating)
-        q_E = 1 - min(1, abs(self.credence - neighbor.credence) * strength_update) * (
+        p_post_E = 1 - min(
+            1, abs(self.credence - neighbor.credence) * mistrust_rate
+        ) * (
             1 - p_E
         )  # O&W's Eq. 2
 
-        self.credence = p_H_E * q_E + p_H_nE * (
-            1 - q_E
+        self.credence = p_new_better_given_E * p_post_E + p_new_worse_given_E * (
+            1 - p_post_E
         )  # Jeffrey's Rule # P'(H) = P(H|E) P'(E) + P(H|~E) P'(~E)#
+
+
+class Bandit:
+    def __init__(self, p_theories=None):
+        if p_theories is None:
+            self.n_theories = 2
+            self.p_theories = np.random.random(2)
+        if p_theories is not None:
+            self.n_theories = len(p_theories)
+            self.p_theories = p_theories
+
+    def experiment(self, theory, n_experiments):
+        p_theory = self.p_theories[theory]
+        n_success = rd.binomial(n_experiments, p_theory)
+        return n_success, n_experiments
 
 
 class BetaAgent:
@@ -141,15 +197,16 @@ class BetaAgent:
     n_experiments (int)] representing the result of the experiments.
     """
 
-    def __init__(self, id, n_theories):
+    def __init__(self, id, bandit: Bandit):
         self.id = id
-        self.n_theories = n_theories
-        if n_theories is None:
-            self.n_theories = 2
+        self.bandit = bandit
+        self.n_theories = bandit.n_theories
         self.beliefs: np.array = np.array(
-            [[rd.random(), rd.random()] for _ in range(n_theories)]
+            [[rd.random(), rd.random()] for _ in range(self.n_theories)]
         )
-        self.experiment_result: np.array = np.array([[0, 0] for _ in range(n_theories)])
+        self.experiment_result: np.array = np.array(
+            [[0, 0] for _ in range(self.n_theories)]
+        )
 
     def __str__(self):
         return (
@@ -158,7 +215,7 @@ class BetaAgent:
             # f"beta = {self.beta}"
         )
 
-    def experiment(self, n_experiments: int, p_theories: np.array):
+    def experiment(self, n_experiments: int):
         """Performs an experiment and updates the agent's experiment_result.
 
         Args:
@@ -167,7 +224,13 @@ class BetaAgent:
         # Reset experiment_result
         self.experiment_result = np.array([[0, 0] for _ in range(self.n_theories)])
 
-        # Decide which theory to experiment on
+        decision = self.decision()
+
+        # Perform experiment on that theory and update experiment_result
+        n_success, n_experiments = self.bandit.experiment(decision, n_experiments)
+        self.experiment_result[decision] = [n_success, n_experiments]
+
+    def decision(self):
         credences = np.array(
             [
                 self.beliefs[theory_id][0]
@@ -175,11 +238,7 @@ class BetaAgent:
                 for theory_id in range(self.n_theories)
             ]
         )
-        experiment_theory_id = rd.choice(np.flatnonzero(credences == np.max(credences)))
-
-        # Perform experiment on that theory and update experiment_result
-        n_success = rd.binomial(n_experiments, p_theories[experiment_theory_id])
-        self.experiment_result[experiment_theory_id] = [n_success, n_experiments]
+        return rd.choice(np.flatnonzero(credences == np.max(credences)))
 
     def beta_update(self, experiment_results):
         """Updates the agent's beliefs based on experiment_results.
