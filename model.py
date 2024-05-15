@@ -96,6 +96,9 @@ class Model:
                 if not alternative_stop:
                     self.conclusion_alternative_stop = self.conclusion
                 break
+        self.conclusion = true_consensus_condition(
+            credences_post
+        )  # We should set this even if we don't break, right??? - MN
 
     def step(self):
         """Updates the model with one step, consisting of experiments and updates."""
