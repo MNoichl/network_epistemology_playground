@@ -1,8 +1,9 @@
-from agent import Agent, BetaAgent
+from agent import Agent, Bandit, BetaAgent, UncertaintyProblem
 
 
 def test_basics():
-    agent = Agent(1)
+    uncertainty_problem = UncertaintyProblem()
+    agent = Agent(1, uncertainty_problem)
     assert agent.id == 1
     assert agent.credence <= 1
     assert agent.credence >= 0
@@ -11,7 +12,8 @@ def test_basics():
 
 
 def test_experiment():
-    agent1 = Agent(1)
+    uncertainty_problem = UncertaintyProblem()
+    agent1 = Agent(1, uncertainty_problem)
     agent1.credence = 0.4
     agent1.experiment(10, 0.05)
     assert agent1.n_success == 0
@@ -19,7 +21,8 @@ def test_experiment():
 
 
 def test_bayes_update():
-    agent1 = Agent(1)
+    uncertainty_problem = UncertaintyProblem()
+    agent1 = Agent(1, uncertainty_problem)
     agent1.credence = 0.6
     n_experiments = 10
     n_success = 8
@@ -48,7 +51,8 @@ def test_bayes_update():
 
 
 def test_beta_update():
-    agent = BetaAgent(1, n_theories=2)
+    bandit = Bandit(p_theories=[0.6, 0.7])
+    agent = BetaAgent(1, bandit)
     agent.beliefs = [[0, 0], [0, 0]]
     agent.beta_update([[1, 4], [0, 0]])
     assert agent.beliefs[0] == [1, 3]
@@ -62,13 +66,14 @@ def test_beta_update():
 
 
 def test_experiment_beta():
-    agent = BetaAgent(1, n_theories=2)
-    agent.experiment(n_experiments=100, p_theories=[0.6, 0.7])
+    bandit = Bandit(p_theories=[0.6, 0.7])
+    agent = BetaAgent(1, bandit)
+    agent.experiment(n_experiments=100)
     assert (agent.experiment_result != 0).any()
     assert (agent.experiment_result == 100).any()
 
     agent.beliefs = [[3, 3], [0, 3]]
-    agent.experiment(n_experiments=100, p_theories=[0.6, 0.7])
+    agent.experiment(n_experiments=100)
     assert (agent.experiment_result[1] == [0, 0]).all()
     assert agent.experiment_result[0][1] == 100
 
