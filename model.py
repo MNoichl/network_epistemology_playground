@@ -1,7 +1,7 @@
 import numpy as np
 import tqdm
 
-from agent import Agent, BetaAgent
+from agent import Agent, Bandit, BetaAgent, UncertaintyProblem
 
 
 class Model:
@@ -12,8 +12,9 @@ class Model:
     Attributes:
     - network: The network.
     - n_experiments (int): The number of experiments per step.
-    - uncertainty (float): The uncertainty in the experiment.
     - agent_type (str): The type of agents, "bayes", "beta" or "jeffrey"
+    - uncertainty (float): The uncertainty in the experiment.
+    - p_theories (list): The success probabilities of the theories.
 
     Methods:
     - __init__(self): Initializes the Model object.
@@ -28,21 +29,25 @@ class Model:
     def __init__(
         self,
         network,
-        uncertainty: float,
         n_experiments: int,
         agent_type: str,
+        uncertainty: float = None,
+        p_theories: list = None,
         *args,
         **kwargs
     ):
         self.network = network
-        self.uncertainty = uncertainty
         self.n_agents = len(network.nodes)
         self.n_experiments = n_experiments
         self.agent_type = agent_type
         if self.agent_type == "beta":
-            self.agents = [BetaAgent(i) for i in range(self.n_agents)]
+            self.bandit = Bandit(p_theories)
+            self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
         else:
-            self.agents = [Agent(i) for i in range(self.n_agents)]
+            self.uncertainty_problem = UncertaintyProblem(uncertainty)
+            self.agents = [
+                Agent(i, self.uncertainty_problem) for i in range(self.n_agents)
+            ]
 
     def run_simulation(
         self, number_of_steps: int = 10**6, show_bar: bool = False, *args, **kwargs
@@ -53,16 +58,21 @@ class Model:
             number_of_steps (int, optional): Number of steps in the simulation
             (it will end sooner if the stop condition is met). Defaults to 10**6."""
 
-        def stop_condition(credences_prior, credences_post) -> bool:
-            if np.all(credences_post < 0.5) or np.all(credences_post > 0.99):
-                return True
-            return False
+        # Weisberg's stopping condition:
+        # def stop_condition(credences_prior, credences_post) -> bool:
+        #     if np.all(credences_post < 0.5) or np.all(credences_post > 0.99):
+        #         return True
+        #     return False
 
-        def alternative_stop_condition(credences_prior, credences_post) -> bool:
+        # Weisberg's true_consensus condition
+        # def true_consensus_condition(credences: np.array) -> bool:
+        #     return all(credences > 0.99)
+
+        def stop_condition(credences_prior, credences_post) -> bool:
             return np.allclose(credences_prior, credences_post)
 
-        def true_consensus_condition(credences: np.array) -> bool:
-            return np.all(credences > 0.5)
+        def true_consensus_condition(credences: np.array) -> float:
+            return (credences > 0.5).mean()
 
         iterable = range(number_of_steps)
 
@@ -75,12 +85,12 @@ class Model:
             credences_prior = np.array([agent.credence for agent in self.agents])
             self.step()
             credences_post = np.array([agent.credence for agent in self.agents])
-            if not alternative_stop:
-                if alternative_stop_condition(credences_prior, credences_post):
-                    alternative_stop = True
-                    self.conclusion_alternative_stop = true_consensus_condition(
-                        credences_post
-                    )
+            # if not alternative_stop:
+            #     if alternative_stop_condition(credences_prior, credences_post):
+            #         alternative_stop = True
+            #         self.conclusion_alternative_stop = true_consensus_condition(
+            #             credences_post
+            #         )
             if stop_condition(credences_prior, credences_post):
                 self.conclusion = true_consensus_condition(credences_post)
                 if not alternative_stop:
@@ -94,7 +104,7 @@ class Model:
 
     def agents_experiment(self):
         for agent in self.agents:
-            agent.experiment(self.n_experiments, self.uncertainty)
+            agent.experiment(self.n_experiments)
 
     def agents_update(self):
         for agent in self.agents:
@@ -109,8 +119,8 @@ class Model:
 
             # update
             if self.agent_type == "beta":
-                agent.beta_update(total_success, total_experiments, self.uncertainty)
+                agent.beta_update(total_success, total_experiments)
             elif self.agent_type == "bayes":
-                agent.bayes_update(total_success, total_experiments, self.uncertainty)
+                agent.bayes_update(total_success, total_experiments)
             elif self.agent_type == "jeffrey":
-                agent.jeffrey_update(total_success, total_experiments, self.uncertainty)
+                agent.jeffrey_update(total_success, total_experiments)
