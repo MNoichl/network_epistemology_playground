@@ -71,12 +71,12 @@ def rewire_network(network: nx.DiGraph, p_preferential_attachment: float):
 
 # Ignacios proposed network randomization:
 
-def randomized_barabasi_albert_graph(n,m,p):
-    G = nx.barabasi_albert_graph(n, m)
-    return randomize_network_v2(G, p)
+def randomized_barabasi_albert_graph(n_nodes,n_edges_to_add,randomization_probability):
+    G = nx.barabasi_albert_graph(n_nodes, n_edges_to_add)
+    return randomize_network_v2(G, randomization_probability)
 
 
-def randomize_network_v2(G, p):
+def randomize_network_v2(G, randomization_probability):
     
     edges = list(G.edges()).copy()
     rd.shuffle(edges)
@@ -85,7 +85,7 @@ def randomize_network_v2(G, p):
     new_edges_set = set()
     to_remove_set = set()
     for old_edge in edges:
-        if rd.random() < p:  # p probability to rewire an edge
+        if rd.random() < randomization_probability:  # p probability to rewire an edge
             to_remove_set.add(old_edge)
             new_edge = (rd.choice(nodes),rd.choice(nodes))
             while (new_edge in new_edges_set) or (new_edge[0] == new_edge[1]):
