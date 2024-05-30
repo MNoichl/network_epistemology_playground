@@ -100,6 +100,9 @@ class Model:
             self.conclusion = true_consensus_condition(
             credences_post
         )  # We should set this even if we don't break, right??? - MN
+        
+        self.add_agent_history()
+            
 
     def step(self):
         """Updates the model with one step, consisting of experiments and updates."""
@@ -128,3 +131,7 @@ class Model:
                 agent.bayes_update(total_success, total_experiments)
             elif self.agent_type == "jeffrey":
                 agent.jeffrey_update(total_success, total_experiments)
+                
+                
+    def add_agent_history(self):
+        self.agent_histories = [agent.credence_history for agent in self.agents]

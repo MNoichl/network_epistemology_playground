@@ -108,14 +108,14 @@ class Agent:
         self.credence = 1 / (
             1 + likelihood_ratio_credence * likelihood_ratio_evidence_given_probability
         )
-        self.credence_history.append(self.credence)
+        self.credence_history.append(self.credence[0])
 
     def beta_update(self,n_success,n_experiments):
         p_new_better = 0.5 + self.uncertainty_problem.uncertainty
         p_new_worse = 0.5 - self.uncertainty_problem.uncertainty   
         mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
         self.credence = mean
-        self.credence_history.append(self.credence)
+        self.credence_history.append(self.credence[0])
 
     def jeffrey_update(self, neighbor, uncertainty, mistrust_rate):
         """
@@ -166,7 +166,7 @@ class Agent:
         self.credence = p_new_better_given_E * p_post_E + p_new_worse_given_E * (
             1 - p_post_E
         )  # Jeffrey's Rule # P'(H) = P(H|E) P'(E) + P(H|~E) P'(~E)#
-    self.credence_history.append(self.credence)
+        self.credence_history.append(self.credence[0])
     
 
 class Bandit:
