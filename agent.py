@@ -18,7 +18,7 @@ class UncertaintyProblem:
         self.uncertainty = uncertainty
         self.p_old_theory = 0.5
         self.p_new_theory = 0.5 + uncertainty
-
+        
     def experiment(self, n_experiments: int):
         """
         Performs an experiment using the new_theory.
@@ -27,6 +27,8 @@ class UncertaintyProblem:
         - n_experiments (int): the number of experiments.
         """
         n_success = rd.binomial(n_experiments, self.p_new_theory)
+        self.successes += n_success
+        self.failures += (n_experiments-n_success)
         return n_success, n_experiments
 
 
@@ -54,8 +56,11 @@ class Agent:
         self.id = id
         self.uncertainty_problem = uncertainty_problem
         self.credence: float = rd.uniform(0, 1)
-        self.n_success: int = 0
-        self.n_experiments: int = 0
+        # I initialize with 1 rather than zero so that we can sample from the beta
+        self.n_success: int = 1
+        self.n_experiments: int = 1
+        self.accumulated_successes = np.zeros(1)+1
+        self.accumulated_failures = np.zeros(1)+1
 
     def __str__(self):
         return (
@@ -75,6 +80,8 @@ class Agent:
             self.n_success, self.n_experiments = self.uncertainty_problem.experiment(
                 n_experiments
             )
+            self.accumulated_successes += self.n_success
+            self.accumulated_failures += (self.n_experiments-self.n_success)
         else:
             self.n_success = 0
             self.n_experiments = 0
@@ -101,6 +108,12 @@ class Agent:
         self.credence = 1 / (
             1 + likelihood_ratio_credence * likelihood_ratio_evidence_given_probability
         )
+
+    def beta_update(self,n_success,n_experiments):
+        p_new_better = 0.5 + self.uncertainty_problem.uncertainty
+        p_new_worse = 0.5 - self.uncertainty_problem.uncertainty   
+        mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
+        self.credence = mean
 
     def jeffrey_update(self, neighbor, uncertainty, mistrust_rate):
         """
