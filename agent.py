@@ -1,6 +1,6 @@
 import numpy as np
 import numpy.random as rd
-
+from scipy.stats import beta
 
 class UncertaintyProblem:
     """
@@ -27,8 +27,6 @@ class UncertaintyProblem:
         - n_experiments (int): the number of experiments.
         """
         n_success = rd.binomial(n_experiments, self.p_new_theory)
-        self.successes += n_success
-        self.failures += (n_experiments-n_success)
         return n_success, n_experiments
 
 

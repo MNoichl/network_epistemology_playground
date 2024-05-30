@@ -40,14 +40,15 @@ class Model:
         self.n_agents = len(network.nodes)
         self.n_experiments = n_experiments
         self.agent_type = agent_type
-        if self.agent_type == "beta":
-            self.bandit = Bandit(p_theories)
-            self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
-        else:
-            self.uncertainty_problem = UncertaintyProblem(uncertainty)
-            self.agents = [
-                Agent(i, self.uncertainty_problem) for i in range(self.n_agents)
-            ]
+        #if self.agent_type == "beta":
+            #self.bandit = Bandit(p_theories)
+            # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
+
+        # else:
+        self.uncertainty_problem = UncertaintyProblem(uncertainty)
+        self.agents = [
+            Agent(i, self.uncertainty_problem) for i in range(self.n_agents)
+        ]
 
     def run_simulation(
         self, number_of_steps: int = 10**6, show_bar: bool = False, *args, **kwargs
