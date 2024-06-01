@@ -3,3 +3,4 @@
 * assymmetry in experimental behaviour
 
 * Something seems fishy because if you look at change in self.credence by state for each agent, they dont seem to change.
+* I tried the bayes agent again and it seems to be working well in this version.

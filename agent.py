@@ -117,7 +117,7 @@ class Agent:
         self.credence = mean
         self.credence_history.append(self.credence[0])
 
-    def jeffrey_update(self, neighbor, uncertainty, mistrust_rate):
+    def jeffrey_update(self, neighbor, uncertainty, mistrust_rate=0.5):
         """
         Updates the agent's credence using Jeffrey's rule.
 
