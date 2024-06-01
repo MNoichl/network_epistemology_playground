@@ -6,7 +6,7 @@
     - It might be good to think about this and somehow identify the regions of convergence in the parameter space.
     - Does network distribution affect these regions of convergence?
 
-* Jeffrey agent is not really working, but I will do my best (Ignacio
+* Jeffrey agent is not really working, but I will do my best (Ignacio)
     - Part of the problem is that the jeffrey update collides with what the model is doing
     - in the model what we have is that each agent receives the cummulative number of successes and failures from their neighbors as input
     - this version of jeffrey update seems to require as input a neighbor. It is doable though, but I will let it sleep for a bit.)
