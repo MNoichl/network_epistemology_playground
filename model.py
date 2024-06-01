@@ -130,7 +130,14 @@ class Model:
             elif self.agent_type == "bayes":    
                 agent.bayes_update(total_success, total_experiments)
             elif self.agent_type == "jeffrey":
-                agent.jeffrey_updatev2(total_success, total_experiments)
+                for neighbor in neighbor_agents:
+                    if neighbor==agent.id:
+                        agent.bayes_update(agent.n_success, agent.n_experiments)
+                    else:
+                        neighbor_n_success = int(neighbor.n_success)
+                        neighbor_n_experiments=int(neighbor.n_experiments)
+                        neighbor_credence = neighbor.credence
+                        agent.jeffrey_updatev2(self, neighbor_n_success, neighbor_n_experiments,neighbor_credence)
                 
                 
     def add_agent_history(self):
