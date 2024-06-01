@@ -130,7 +130,7 @@ class Model:
             elif self.agent_type == "bayes":    
                 agent.bayes_update(total_success, total_experiments)
             elif self.agent_type == "jeffrey":
-                agent.jeffrey_update(total_success, total_experiments)
+                agent.jeffrey_updatev2(total_success, total_experiments)
                 
                 
     def add_agent_history(self):

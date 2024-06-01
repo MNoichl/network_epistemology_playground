@@ -168,7 +168,61 @@ class Agent:
         )  # Jeffrey's Rule # P'(H) = P(H|E) P'(E) + P(H|~E) P'(~E)#
         self.credence_history.append(self.credence)
     
+    # I am playing with Heins code here, the original is above (Ignacio)
+    # Part of the problem is that the jeffrey update collides with what the model is doing
+    # in the model what we have is that each agent receives the cummulative number of successes and failures from their neighbors as input
+    # this version of jeffrey update seems to require as input a neighbor. It is doable though, but I will let it sleep for a bit.
+    def jeffrey_updatev2(self,n_success,n_experiments):#neighbor, uncertainty, mistrust_rate=0.5):
+        """
+        Updates the agent's credence using Jeffrey's rule.
 
+        Args:
+        - neighbor (Agent): An Agent object representing the neighbor agent.
+        - uncertainty (float): The uncertainty in the experiment.
+        - mistrust_rate (float): The rate at which difference of opinion increases
+        discounting.
+        """
+        # Todo (Hein): understand the update and refactor with sensible variable names
+        n_failures = n_experiments - n_success
+
+        p_success_given_new_better = 0.5 + self.uncertainty_problem.uncertainty
+        p_E_given_new_better = (
+            p_success_given_new_better**n_success
+            * (1 - p_success_given_new_better) ** n_failures
+        )  # P(E|H)  = p^k (1-p)^(n-k)
+        p_success_given_new_worse = 0.5 - self.uncertainty_problem.uncertainty
+        p_E_given_new_worse = (
+            p_success_given_new_worse**n_success
+            * (1 - p_success_given_new_worse) ** n_failures
+        )  # P(E|~H) = (1-p)^k p^(n-k)
+        p_E = (
+            self.credence * p_E_given_new_better
+            + (1 - self.credence) * p_E_given_new_worse
+        )  # P(E) = P(E|H) P(H) + P(E|~H) P(~H)
+
+        p_new_better_given_E = (
+            self.credence * p_E_given_new_better / p_E
+        )  # P(H|E)  = P(H) P(E|H)  / P(E)
+        p_new_worse_given_E = (
+            self.credence * (1 - p_E_given_new_better) / (1 - p_E)
+        )  # P(H|~E) = P(H) P(~E|H) / P(~E)
+
+        # p_post_E = max(1 - abs(self.credence - neighbor.credence) * mistrust_rate *
+        # (1 - p_E), 0)
+        # O&W's Eq. 1 (anti-updating)
+        p_post_E = 1 - min(
+            1, abs(self.credence - neighbor.credence) * mistrust_rate
+        ) * (
+            1 - p_E
+        )  # O&W's Eq. 2
+
+        self.credence = p_new_better_given_E * p_post_E + p_new_worse_given_E * (
+            1 - p_post_E
+        )  # Jeffrey's Rule # P'(H) = P(H|E) P'(E) + P(H|~E) P'(~E)#
+        self.credence_history.append(self.credence)
+        
+        
+        
 class Bandit:
     def __init__(self, p_theories=None):
         if p_theories is None:
