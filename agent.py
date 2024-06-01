@@ -57,8 +57,14 @@ class Agent:
         # I initialize with 1 rather than zero so that we can sample from the beta
         self.n_success: int = 1
         self.n_experiments: int = 1
+        # For the beta agent
+        # Instead of initializing with just alpha=beta=1, I ALSO initialize be sampling from the binomial/uncertainty problem
         self.accumulated_successes = np.zeros(1)+1
         self.accumulated_failures = np.zeros(1)+1
+        successes, failures = self.uncertainty_problem.experiment(10000)
+        self.accumulated_successes+=successes
+        self.accumulated_failures+=failures
+        
         self.credence_history = []
         self.credence_history.append(self.credence)
 

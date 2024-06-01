@@ -2,8 +2,9 @@
     * We implemented the behaviour of the agent by following the highest mean. Other options could be to take the mode or to sample from the beta-distributions
 * assymmetry in experimental behaviour
 
-* Something seems fishy because if you look at change in self.credence by state for each agent, they dont seem to change.
-* I tried the bayes agent again and it seems to be working well in this version.
+* Bayes Agent and Beta Agent seem to be working. But they seem to have convergence at different regions of the parameter space (for example n_agents, n_steps, n_experiments, uncertainty, network). But in general the beta agent converges much faster, although I am not sure it is being very successful.
+    - It might be good to think about this and somehow identify the regions of convergence in the parameter space.
+    - Does network distribution affect these regions of convergence?
 
 * Jeffrey agent is not really working, but I will do my best (Ignacio
     - Part of the problem is that the jeffrey update collides with what the model is doing
