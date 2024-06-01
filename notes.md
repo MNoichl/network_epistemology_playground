@@ -11,3 +11,4 @@
     - in the model what we have is that each agent receives the cummulative number of successes and failures from their neighbors as input
     - this version of jeffrey update seems to require as input a neighbor. It is doable though, but I will let it sleep for a bit.
     - Well I've been putting a couple of hours and although I am making progress it might take more time.
+    - Made progress, but the line:         p_new_worse_given_E = (self.credence * (1 - p_E_given_new_better) / (1 - p_E)) has a division by zero some times.

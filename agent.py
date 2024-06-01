@@ -178,7 +178,7 @@ class Agent:
     # Part of the problem is that the jeffrey update collides with what the model is doing
     # in the model what we have is that each agent receives the cummulative number of successes and failures from their neighbors as input
     # this version of jeffrey update seems to require as input a neighbor. It is doable though, but I will let it sleep for a bit.
-    def jeffrey_updatev2(self, neighbor_n_success, neighbor_n_experiments, neighbor_credence,mistrust_rate=0.5):
+    def jeffrey_updatev2(self, neighbor_n_success, neigbor_n_failures, neighbor_credence,mistrust_rate=0.5):
         """
         Updates the agent's credence using Jeffrey's rule.
 
@@ -188,10 +188,10 @@ class Agent:
         - mistrust_rate (float): The rate at which difference of opinion increases
         discounting.
         """
+        #print(type(neighbor_n_success))
         # Todo (Hein): understand the update and refactor with sensible variable names
-        neigbor_n_failures = neighbor_n_experiments - neighbor_n_success
         p_success_given_new_better = 0.5 + self.uncertainty_problem.uncertainty
-        
+        #print(type(p_success_given_new_better))
         p_E_given_new_better = (
             p_success_given_new_better**neighbor_n_success
             * (1 - p_success_given_new_better) ** neigbor_n_failures
