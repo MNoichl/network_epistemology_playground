@@ -1,7 +1,7 @@
 import numpy as np
 import tqdm
 
-from agent import Agent, Bandit, UncertaintyProblem
+from agents_clean import Agent, Bandit, UncertaintyProblem
 
 
 class Model:
@@ -39,16 +39,17 @@ class Model:
         self.network = network
         self.n_agents = len(network.nodes)
         self.n_experiments = n_experiments
-        self.agent_type = agent_type
-        #if self.agent_type == "beta":
-            #self.bandit = Bandit(p_theories)
-            # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
-
         # else:
         self.uncertainty_problem = UncertaintyProblem(uncertainty)
         self.agents = [
             Agent(i, self.uncertainty_problem) for i in range(self.n_agents)
         ]
+        self.agent_type = agent_type
+        if self.agent_type == "beta":
+            for agent in self.agents:
+                agent.init_beta()
+            #self.bandit = Bandit(p_theories)
+            # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
 
     def run_simulation(
         self, number_of_steps: int = 10**6, show_bar: bool = False, *args, **kwargs
@@ -129,6 +130,7 @@ class Model:
                 agent.beta_update(total_success, total_experiments)
             elif self.agent_type == "bayes":    
                 agent.bayes_update(total_success, total_experiments)
+                # The Jeffrey update is not really working still
             elif self.agent_type == "jeffrey":
                 for neighbor in neighbor_agents: # I am here copying what Weisberg did
                     if neighbor.id==agent.id:

@@ -14,7 +14,7 @@ class UncertaintyProblem:
     - experiment(self, n_experiments): Performs an experiment using the new_theory.
     """
 
-    def __init__(self, uncertainty: float = 0.001) -> None:
+    def __init__(self, uncertainty: float = 0.1) -> None:
         self.uncertainty = uncertainty
         self.p_old_theory = 0.5
         self.p_new_theory = 0.5 + uncertainty
@@ -58,15 +58,21 @@ class Agent:
         self.n_success: int = 1
         self.n_experiments: int = 1
         # For the beta agent
-        # Instead of initializing with just alpha=beta=1, I ALSO initialize be sampling from the binomial/uncertainty problem
         self.accumulated_successes = np.zeros(1)+1
-        self.accumulated_failures = np.zeros(1)+1
-        successes, failures = self.uncertainty_problem.experiment(10000)
-        self.accumulated_successes+=successes
-        self.accumulated_failures+=failures
-        
+        self.accumulated_failures = np.zeros(1)+1      
         self.credence_history = []
         self.credence_history.append(self.credence)
+    
+    # Instead of initializing with just alpha=beta=1, I ALSO initialize be sampling from the binomial/uncertainty problem
+    def init_beta(self):
+        n_success, n_experiments = self.uncertainty_problem.experiment(1000000)
+        self.accumulated_successes+=n_success
+        self.accumulated_failures+=(n_experiments-n_success)
+        mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
+        #print(self.accumulated_successes/(self.accumulated_failures+self.accumulated_successes))
+        self.credence = mean
+        self.credence_history = []
+        self.credence_history.append(self.credence[0])
 
     def __str__(self):
         return (
@@ -121,7 +127,7 @@ class Agent:
         p_new_worse = 0.5 - self.uncertainty_problem.uncertainty   
         mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
         self.credence = mean
-        self.credence_history.append(self.credence[0])
+        self.credence_history.append(self.credence[0]) # this is usually a vector to factor multiple theories
 
     def jeffrey_update(self, neighbor, uncertainty, mistrust_rate=0.5):
         """
