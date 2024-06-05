@@ -67,7 +67,7 @@ class Agent:
         self.credence_history.append(self.credence)
     # Instead of initializing with just alpha=beta=1, I ALSO initialize be sampling from the binomial/uncertainty problem
     def init_beta(self):
-        n_success, n_experiments = self.uncertainty_problem.experiment(10)
+        n_success, n_experiments = self.uncertainty_problem.experiment(2)
         self.accumulated_successes+=n_success
         self.accumulated_failures+=(n_experiments-n_success)
         mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
