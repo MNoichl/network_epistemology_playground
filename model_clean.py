@@ -1,5 +1,6 @@
 import numpy as np
 import tqdm
+import pandas as pd
 
 from agents_clean import Agent, Bandit, UncertaintyProblem
 
@@ -38,6 +39,7 @@ class Model:
     ):
         self.network = network
         self.n_agents = len(network.nodes)
+        print(self.n_agents)
         self.n_experiments = n_experiments
         # else:
         self.uncertainty_problem = UncertaintyProblem(uncertainty)
@@ -48,6 +50,9 @@ class Model:
         if self.agent_type == "beta":
             for agent in self.agents:
                 agent.init_beta()
+        if self.agent_type == "bayes":
+            for agent in self.agents:
+                agent.init_bayes()
             #self.bandit = Bandit(p_theories)
             # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
 
@@ -148,4 +153,5 @@ class Model:
                 
     def add_agent_history(self):
         self.agent_histories = [agent.credence_history for agent in self.agents]
-        self.agent_choices = [agent.choice_history for agent in self.agents]
+        agent_choices = [agent.choice_history for agent in self.agents]
+        self.agents_choices = pd.DataFrame(agent_choices)

@@ -53,17 +53,18 @@ class Agent:
     def __init__(self, id, uncertainty_problem: UncertaintyProblem):
         self.id = id
         self.uncertainty_problem = uncertainty_problem
-        self.credence: float = rd.uniform(0, 1)
         # I initialize with 1 rather than zero so that we can sample from the beta
         self.n_success: int = 1
         self.n_experiments: int = 1
         # For the beta agent
         self.accumulated_successes = np.zeros(1)+1
         self.accumulated_failures = np.zeros(1)+1      
+        self.choice_history = []
+        
+    def init_bayes(self):
+        self.credence: float = rd.uniform(0, 1)
         self.credence_history = []
         self.credence_history.append(self.credence)
-        self.choice_history = []
-    
     # Instead of initializing with just alpha=beta=1, I ALSO initialize be sampling from the binomial/uncertainty problem
     def init_beta(self):
         n_success, n_experiments = self.uncertainty_problem.experiment(10)
@@ -129,8 +130,8 @@ class Agent:
         p_new_better = 0.5 + self.uncertainty_problem.uncertainty
         p_new_worse = 0.5 - self.uncertainty_problem.uncertainty   
         mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
-        self.credence = mean
-        self.credence_history.append(self.credence[0]) # this is usually a vector to factor multiple theories
+        self.credence = mean[0]
+        self.credence_history.append(self.credence) # this is usually a vector to factor multiple theories
 
     def jeffrey_update(self, neighbor, uncertainty, mistrust_rate=0.5):
         """
