@@ -39,7 +39,7 @@ class Model:
     ):
         self.network = network
         self.n_agents = len(network.nodes)
-        print(self.n_agents)
+        #print(self.n_agents)
         self.n_experiments = n_experiments
         # else:
         self.uncertainty_problem = UncertaintyProblem(uncertainty)
