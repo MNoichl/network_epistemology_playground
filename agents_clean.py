@@ -228,7 +228,6 @@ class Agent:
         self.credence_history.append(self.credence)
         
         
-        
 class Bandit:
     def __init__(self, p_theories=None):
         if p_theories is None:
