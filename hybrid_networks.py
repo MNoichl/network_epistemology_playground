@@ -1,5 +1,4 @@
 import random as rd
-
 import networkx as nx
 
 
