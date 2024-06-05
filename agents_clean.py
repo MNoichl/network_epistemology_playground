@@ -62,17 +62,18 @@ class Agent:
         self.accumulated_failures = np.zeros(1)+1      
         self.credence_history = []
         self.credence_history.append(self.credence)
+        self.choice_history = []
     
     # Instead of initializing with just alpha=beta=1, I ALSO initialize be sampling from the binomial/uncertainty problem
     def init_beta(self):
-        n_success, n_experiments = self.uncertainty_problem.experiment(1000000)
+        n_success, n_experiments = self.uncertainty_problem.experiment(10)
         self.accumulated_successes+=n_success
         self.accumulated_failures+=(n_experiments-n_success)
         mean, var= beta.stats(self.accumulated_successes, self.accumulated_failures, moments='mv')
         #print(self.accumulated_successes/(self.accumulated_failures+self.accumulated_successes))
-        self.credence = mean
+        self.credence = mean[0]
         self.credence_history = []
-        self.credence_history.append(self.credence[0])
+        self.credence_history.append(self.credence)
 
     def __str__(self):
         return (
@@ -92,9 +93,11 @@ class Agent:
             self.n_success, self.n_experiments = self.uncertainty_problem.experiment(
                 n_experiments
             )
+            self.choice_history.append(1)
         else:
             self.n_success = 0
             self.n_experiments = 0
+            self.choice_history.append(0)
 
     def bayes_update(self, n_success, n_experiments):
         """

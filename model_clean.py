@@ -148,3 +148,4 @@ class Model:
                 
     def add_agent_history(self):
         self.agent_histories = [agent.credence_history for agent in self.agents]
+        self.agent_choices = [agent.choice_history for agent in self.agents]
