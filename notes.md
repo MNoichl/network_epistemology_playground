@@ -37,8 +37,11 @@
 * This Zollman paper uses bandits: https://www.journals.uchicago.edu/doi/full/10.1093/bjps/axv013
 
 * TODOS: The spiel will be: "Those networks are all very theoretical, real life epistemic networks are centralized: what are the effects bla bla" Because the robustness issue was already developed by Rosenstock.
-    1. Get the real life citation networks for 'perceptron' and 'peptic ulcer' with the relevant date windows. They both share the feature that an alternative theory/paradigm was better but the standard one remained for longer than it should.
-    2. Incorporate speed into the simulations. 
-    3. Run simulations with rewiring.
-    4. Hopefully get some results in this direction.
-    5. The tricky part is that beta and bayes have different zones of convergence/success.
+    * 1. (Max) Get the real life citation networks for 'perceptron' and 'peptic ulcer' with the relevant date windows. They both share the feature that an alternative theory/paradigm was better but the standard one remained for longer than it should.
+    * 2. (Ignacio) Incorporate speed into the simulations.
+    * Incorporate density and clustering. It might be a good idea to change the density of empirical networks randomly. 
+    * 3. (Ignacio) Run simulations with rewiring.
+    * (Max) take a look at the simulation code, check for bugs.
+    * (Ignacio) The tricky part is that beta and bayes have different zones of convergence/success. In particular, regarding the uncertainty parameter.
+    * Check the edge direction is working well.
+    * Incorporate network weights, if there is time.
