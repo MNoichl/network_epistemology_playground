@@ -35,3 +35,9 @@
     - "Yet since the Zollman effect displays neither structural nor parameter robustness, all these questions, including the impossible ones, must be dealt with to determine whether epistemic network models recommend a sparser or denser network."
 
 * This Zollman paper uses bandits: https://www.journals.uchicago.edu/doi/full/10.1093/bjps/axv013
+
+* TODOS: The spiel will be: "Those networks are all very theoretical, real life epistemic networks are centralized: what are the effects bla bla" Because the robustness issue was already developed by Rosenstock.
+    1. Get the real life citation networks for 'perceptron' and 'peptic ulcer' with the relevant date windows. They both share the feature that an alternative theory/paradigm was better but the standard one remained for longer than it should.
+    2. Incorporate speed into the simulations. 
+    3. Run simulations with rewiring.
+    4. Hopefully get some results in this direction.
