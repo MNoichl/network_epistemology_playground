@@ -41,3 +41,4 @@
     2. Incorporate speed into the simulations. 
     3. Run simulations with rewiring.
     4. Hopefully get some results in this direction.
+    5. The tricky part is that beta and bayes have different zones of convergence/success.
