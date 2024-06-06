@@ -117,7 +117,7 @@ class Model:
         for agent in self.agents:
             # gather information from neighbors
             neighbor_nodes = list(self.network.neighbors(agent.id))
-            neighbor_agents = [self.agents[x] for x in neighbor_nodes]
+            neighbor_agents = [self.agents[x] for x in neighbor_nodes] #Double check for bipartite graphs?!
             total_success = agent.n_success
             total_experiments = agent.n_experiments
             for neighbor in neighbor_agents:
