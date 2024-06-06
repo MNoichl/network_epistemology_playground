@@ -78,7 +78,16 @@ class Model:
 
         def stop_condition(credences_prior, credences_post) -> bool:
             return np.allclose(credences_prior, credences_post)
-
+        
+        # This stop condition is (similar to) what Zollman says in the paper pg. 8
+        # Namely the process changes if scientists are making the same choice before and after
+        def stop_condition2(self):
+            agents_choices = [agent.choice_history for agent in self.agents]
+            length = len(agents_choices[0])
+            previous_choices = [hist[lenght-2] for hist in agents_choices]
+            present_choices = [hist[lenght-1] for hist in agents_choices]
+            return np.allclose(np.array(previous_choices), np.array(present_choices))
+            
         def true_consensus_condition(credences: np.array) -> float:
             return (credences > 0.5).mean()
 
@@ -104,9 +113,7 @@ class Model:
                 if not alternative_stop:
                     self.conclusion_alternative_stop = self.conclusion
                 break
-            self.conclusion = true_consensus_condition(
-            credences_post
-        )  # We should set this even if we don't break, right??? - MN
+            self.conclusion = true_consensus_condition(credences_post)  # We should set this even if we don't break, right??? - MN
         
         self.add_agent_history()
             
