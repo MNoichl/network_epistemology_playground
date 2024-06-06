@@ -60,6 +60,9 @@ class Agent:
         self.accumulated_successes = np.zeros(1)+1
         self.accumulated_failures = np.zeros(1)+1      
         self.choice_history = []
+        self.credence: float = rd.uniform(0, 1)
+        self.credence_history = []
+        self.credence_history.append(self.credence)
         
     def init_bayes(self):
         self.credence: float = rd.uniform(0, 1)

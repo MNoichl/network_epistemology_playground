@@ -47,12 +47,13 @@ class Model:
             Agent(i, self.uncertainty_problem) for i in range(self.n_agents)
         ]
         self.agent_type = agent_type
-        if self.agent_type == "beta":
-            for agent in self.agents:
-                agent.init_beta()
-        if self.agent_type == "bayes":
-            for agent in self.agents:
-                agent.init_bayes()
+        # Theres a choice of initialization to be made
+        #if self.agent_type == "beta":
+            #for agent in self.agents:
+                #agent.init_beta()
+        #if self.agent_type == "bayes":
+            #for agent in self.agents:
+                #agent.init_bayes()
             #self.bandit = Bandit(p_theories)
             # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
 
