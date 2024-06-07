@@ -45,3 +45,10 @@
     * (Ignacio) The tricky part is that beta and bayes have different zones of convergence/success. In particular, regarding the uncertainty parameter.
     * Check the edge direction is working well.
     * Incorporate network weights, if there is time.
+
+* Speed (Ignacio)
+    - Its working well but the regression I believe is defined for floats and we have integers here
+    - "ValueError: y data is not in domain of logit link function. Expected domain: [0.0, 1.0], but found [2.0, 1000.0]"
+
+* Rewiring (Ignacio)
+    - Need to incorporate the rewiring in the direction of randomness into the function
