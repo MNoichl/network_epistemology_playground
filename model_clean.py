@@ -56,7 +56,9 @@ class Model:
                 #agent.init_bayes()
             #self.bandit = Bandit(p_theories)
             # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
-
+        self.n_steps = 0
+        
+        
     def run_simulation(
         self, number_of_steps: int = 10**6, show_bar: bool = False, *args, **kwargs
     ):
@@ -120,6 +122,7 @@ class Model:
 
     def step(self):
         """Updates the model with one step, consisting of experiments and updates."""
+        self.n_steps+=1
         self.agents_experiment()
         self.agents_update()
 
