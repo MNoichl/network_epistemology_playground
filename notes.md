@@ -1,7 +1,3 @@
-* Beta-distributions
-    * We implemented the behaviour of the agent by following the highest mean. Other options could be to take the mode or to sample from the beta-distributions
-* assymmetry in experimental behaviour
-
 * Bayes Agent and Beta Agent seem to be working. But they seem to have convergence at different regions of the parameter space (for example n_agents, n_steps, n_experiments, uncertainty, network). But in general the beta agent converges much faster, although I am not sure it is being very successful.
     - It might be good to think about this and somehow identify the regions of convergence in the parameter space.
     - Does network distribution affect these regions of convergence?
@@ -38,9 +34,9 @@
 
 * TODOS: The spiel will be: "Those networks are all very theoretical, real life epistemic networks are centralized: what are the effects bla bla" Because the robustness issue was already developed by Rosenstock.
     * 1. (Max) Get the real life citation networks for 'perceptron' and 'peptic ulcer' with the relevant date windows. They both share the feature that an alternative theory/paradigm was better but the standard one remained for longer than it should.
-    * 2. (Ignacio) Incorporate speed into the simulations.
+    * 2. (Ignacio) Incorporate speed into the simulations. (Done)
     * Incorporate density and clustering. It might be a good idea to change the density of empirical networks randomly. 
-    * 3. (Ignacio) Run simulations with rewiring.
+    * 3. (Ignacio) Run simulations with rewiring. (In Progress)
     * (Max) take a look at the simulation code, check for bugs.
     * (Ignacio) The tricky part is that beta and bayes have different zones of convergence/success. In particular, regarding the uncertainty parameter.
     * Check the edge direction is working well.
@@ -48,7 +44,10 @@
 
 * Speed (Ignacio)
     - Its working well but the regression I believe is defined for floats and we have integers here
-    - "ValueError: y data is not in domain of logit link function. Expected domain: [0.0, 1.0], but found [2.0, 1000.0]"
+    - "ValueError: y data is not in domain of logit link function. Expected domain: [0.0, 1.0], but found [2.0, 1000.0]" --> this is just for the speed (n_steps) variable
 
 * Rewiring (Ignacio)
-    - Need to incorporate the rewiring in the direction of randomness into the function
+    - Need to incorporate the rewiring in the direction of randomness into the function (Done)
+
+* Plotting
+    - I, Ignacio, made some progress but might need Max for a wrap up.
