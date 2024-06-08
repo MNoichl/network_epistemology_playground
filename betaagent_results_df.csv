@@ -1,0 +1,3 @@
+n_agents,ba_degree,er_prob,p_rewiring,uncertainty,n_experiments,rewiring_type,mean_degree,true_consensus,true_consensus_alternative_stop,choice_consensus,convergence_step,agent_type
+472,37,0.025024598268004506,0.38894379953463865,0.0015744708108151886,114,hierarchical,23.809322033898304,0.8601694915254238,False,0.864406779661017,100,beta
+118,3,0.27463265899064265,0.4683844281836753,0.00968285842997827,962,randomize,5.745762711864407,1.0,False,1.0,100,beta
