@@ -254,3 +254,49 @@ class Bandit:
         p_theory = self.p_theories[theory]
         n_success = rd.binomial(n_experiments, p_theory)
         return n_success, n_experiments
+
+
+
+# I have a payground here where we use a 'perceptron' agent, which estimates the mean given successes and failures
+
+class Perceptron:
+    def __init__(self, input_size, learning_rate=0.01, epochs=1000):
+        self.weights = np.zeros(input_size + 1)  # +1 for bias
+        self.learning_rate = learning_rate
+        self.epochs = epochs
+
+    def activation_function(self, x):
+        return 1 / (1 + np.exp(-x))  # Sigmoid function
+
+    def predict(self, inputs):
+        summation = np.dot(inputs, self.weights[1:]) + self.weights[0]
+        return self.activation_function(summation)
+
+    def train(self, training_inputs, labels):
+        for _ in range(self.epochs):
+            for inputs, label in zip(training_inputs, labels):
+                prediction = self.predict(inputs)
+                error = label - prediction
+                self.weights[1:] += self.learning_rate * error * inputs
+                self.weights[0] += self.learning_rate * error
+
+# Example usage:
+if False:#__name__ == "__main__":
+    # Initialize the perceptron
+    perceptron = Perceptron(input_size=2, learning_rate=0.1, epochs=1000)
+
+    # Training data (2 integers as inputs, float as output)
+    training_inputs = np.array([
+        [1, 2],
+        [2, 3],
+        [3, 4],
+        [4, 5]
+    ])
+    labels = np.array([0.5, 0.6, 0.7, 0.8])  # Example float outputs
+
+    # Train the perceptron
+    perceptron.train(training_inputs, labels)
+
+    # Test the perceptron
+    test_input = np.array([2, 3])
+    print("Prediction for input [2, 3]:", perceptron.predict(test_input))
