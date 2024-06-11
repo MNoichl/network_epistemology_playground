@@ -149,8 +149,10 @@ class Agent:
         self.inner_perceptron.train(training_input, label)
         # Now we need an estimate for the credence
         # let it be the prediction over the accumulated information
-        test_input = np.array([self.accumulated_successes, self.accumulated_failures])
-        big_prediction = perceptron.predict(test_input)
+        #print(type(self.accumulated_successes))
+        test_input = np.array([self.accumulated_successes[0], self.accumulated_failures[0]])
+        #print(test_input.shape)
+        big_prediction = self.inner_perceptron.predict(test_input)
         self.credence = big_prediction
         self.credence_history.append(self.credence)
         
