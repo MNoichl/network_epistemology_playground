@@ -166,5 +166,5 @@ class Model:
                 
     def add_agent_history(self):
         self.agent_histories = [agent.credence_history for agent in self.agents]
-        agent_choices = [agent.choice_history for agent in self.agents]
-        self.agents_choices = pd.DataFrame(agent_choices)
+        #agent_choices = [agent.choice_history for agent in self.agents]
+        #self.agents_choices = pd.DataFrame(agent_choices)
