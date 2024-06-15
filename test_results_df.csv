@@ -1,2 +1,3 @@
-n_agents,p_rewiring,uncertainty,n_experiments,rewiring_type,mean_degree,true_consensus,convergence_step,agent_type
-133403,0.4192832046296292,0.011038734866631924,2938,randomize,11.769480446466721,0.9587115732030014,17,bayes
+n_agents,ba_degree,er_prob,p_rewiring,uncertainty,n_experiments,rewiring_type,mean_degree,true_consensus,convergence_step,agent_type
+83,7,0.05609887142622366,0.6123250088952843,0.00963480143816011,873,randomize,12.120481927710843,1.0,1617,beta
+122,2,0.16449737256382285,0.667360033744504,0.0010418676216802055,942,randomize,3.9344262295081966,0.9754098360655737,3278,beta
