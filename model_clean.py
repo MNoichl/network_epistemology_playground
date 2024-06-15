@@ -80,7 +80,7 @@ class Model:
 
         def stop_condition(credences_prior, credences_post) -> bool:
             # the tolerance is too tight, originally: rtol=1e-05, atol=1e-08
-            return np.allclose(credences_prior, credences_post,rtol=1e-05, atol=1e-05)
+            return np.allclose(credences_prior, credences_post,rtol=1e-03, atol=1e-03)
         
         # This stop condition is (similar to) what Zollman says in the paper pg. 8
         # Namely the process changes if scientists are making the same choice before and after
