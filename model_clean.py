@@ -34,6 +34,7 @@ class Model:
         agent_type: str,
         uncertainty: float = None,
         p_theories: list = None,
+        tolerance = 1e-03,
         *args,
         **kwargs
     ):
@@ -57,7 +58,7 @@ class Model:
             #self.bandit = Bandit(p_theories)
             # self.agents = [BetaAgent(i, self.bandit) for i in range(self.n_agents)]
         self.n_steps = 0
-        
+        self.tolerance = tolerance
         
     def run_simulation(
         self, number_of_steps: int = 10**6, show_bar: bool = False, *args, **kwargs
@@ -80,7 +81,7 @@ class Model:
 
         def stop_condition(credences_prior, credences_post) -> bool:
             # the tolerance is too tight, originally: rtol=1e-05, atol=1e-08
-            return np.allclose(credences_prior, credences_post,rtol=1e-03, atol=1e-03)
+            return np.allclose(credences_prior, credences_post,rtol=self.tolerance, atol=self.tolerance)
         
         # This stop condition is (similar to) what Zollman says in the paper pg. 8
         # Namely the process changes if scientists are making the same choice before and after
