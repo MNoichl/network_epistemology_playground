@@ -1,0 +1,116 @@
+---
+title: "Something something powerlaws"
+author: "Hein Duijf, Max Noichl & Ignacio Quintaja"
+institute: ""
+date: 2024-6-19
+
+format: 
+    revealjs:
+        template-partials:
+            - title-slide.html
+        title-slide-attributes:
+            data-background-image: images/background_failure.png
+            data-background-size: cover
+            data-background-opacity: "1."
+
+        theme: [default, custom.scss]
+        navigation-mode: vertical
+        include-in-header:  
+            text: |
+                <style>
+                .center-xy {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                width: auto; /* Maintain aspect ratio */
+                height: auto; /* Maintain aspect ratio */
+                box-sizing: border-box; /* Include padding/border in size */
+                max-height: none;
+                }
+                </style>
+        auto-stretch: false
+        incremental: true 
+bibliography: my_lib.bib
+csl: the-journal-of-modern-history.csl
+cite-method: citeproc
+dependencies:
+  - "custom.scss"
+controls: true
+width: 1400 # 1060
+height: 1000 # 700
+margin: 0.15 # 1
+min-scale: 0.2
+max-scale: 1.6
+# background-image: "images/background_egg.png"
+---
+
+
+# General Introduction
+
+* Something about what people in the literature have been doing and what do we do differently
+* dsafadsdf
+@bieriWasBleibtAnalytischen2007
+
+#
+::: {.r-fit-text}
+Dow does <span class="highlight"> Degree Distribution </span>
+:::
+::: {.r-fit-text}
+affect the epistemic performance of
+:::
+::: {.r-fit-text}
+networked communities?
+:::
+
+# Main points
+* There is a significant effect of randomizing, on empirical networks. This is one philosophical conversation.
+* There does not seem to be an effect in randomizing, for generated/simulated networks. This is another philosophical conversation.
+
+# Methods
+We simulate a very specific philsci scenario, namely when the community has a default theory and there is a competitor entering the game. Also this is tied to the philosophical examples we picked.
+We consider randomizing networks as the main method.
+We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness)
+
+
+We run simulations on empirical networks.
+
+
+# Results on Simulated Networks (~ 2 slides)
+
+Show results (pretty plots are valuable here), namely now effect. (We can try a few more simulations here too)
+Brief discussion on the fact that the parameter space is too big, and the simulated networks can be very different from real life networks.
+
+# Results on Empirical Networks (~ 5 slides)
+
+Explain the two case studies that we selected, and why.
+Show visualizations of the networks, and the loglog plots. Emphasize how unequally distributed they are.
+Show pretty plots of the results.
+Brief discussion of what might explain the effects, as a segway to the next section.
+
+# Discussion (~5 slides)
+Proper discussion on what explains the effects, how robust the results are, and how to move forward with the research question. 
+I am not entirely sure what explains the effects.
+Proper discussion of the fact that how possibly explanations might be deceiving, and that empirically informed approaches are better.
+
+
+
+
+
+<!-- #
+![](images/%E2%80%8ESFI%20AGWCSS.%E2%80%8E001.png){width=130% fig-align="center"} -->
+
+
+
+
+
+# 
+
+![](images/programming_owl_transparent.png){width=100% fig-align="center"}
+
+<div style="text-align: center;">
+<h1>Thank you!</h1>
+</div>
+

@@ -1,0 +1,157 @@
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: "Vollkorn", "Book Antiqua", Palatino, FreeSerif, serif !default;
+
+
+// colors
+$body-bg: #ededed !default;
+$body-color: #000 !default;
+$link-color: #ab0b00 !default;
+$selection-bg: #ab0b00 !default;
+$myaccent: #ab0b00;
+
+// headings
+$presentation-heading-font: "Jost", "Book Antiqua", Palatino, FreeSerif, serif !default;
+$presentation-heading-color: #000 !default;
+$small-caps-font: "Vollkorn SC", "Book Antiqua", Palatino, FreeSerif, serif !default;
+
+
+
+
+/*-- scss:rules --*/
+
+
+
+.smallcaps { 
+    font-family: $small-caps-font !important;
+
+  }
+
+  .highlight { 
+    color: $myaccent !important;
+
+  }
+
+
+
+
+.reveal a {
+    line-height: 1.3em;
+}
+
+// Itemize and Enumerate Styles
+.reveal ul {
+    list-style-type: none !important;
+    // padding: 0 !important;
+    list-style-position: outside;
+}
+
+.reveal li {
+    text-indent: -56pt;
+    padding-left: .7em;
+}
+
+.reveal ul li::before {
+    content: "*" !important; // Asterisk as bullet
+    color: $myaccent !important;
+    font-size: 53pt;
+    margin-right: 0.15em !important;
+    font-family: Jost, sans-serif !important; // Ensure consistent font
+    vertical-align: baseline !important; // Adjust vertical alignment to baseline
+    line-height: 1 !important; // Adjust line-height for better alignment
+    position: relative;
+    top: 0.35em; // Fine-tune vertical position
+}
+
+// Titles and Headings
+.reveal .title,
+.reveal h1,
+.reveal h2,
+{
+    font-family: $presentation-heading-font, sans-serif !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase !important;
+    font-weight: 300;
+    margin-bottom: 4%;
+    // margin-top: 8%;
+
+}
+// .reveal h3,
+// .reveal h4,
+// .reveal h5,
+// .reveal h6 
+
+
+
+//   Citation formatting
+span.citation, span.citation *  {
+    font-family: $presentation-heading-font, sansserif !important;
+    font-size: 20pt;
+    line-height: .2 !important; // Adjust line-height for better alignment
+
+}
+
+
+
+  .reveal .title {
+    margin-top:  0%;
+    text-align: right;
+    margin-bottom: 5%;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase !important;
+    font-weight: 400;
+    font-size: 40pt;
+    margin-right: -100pt;
+    // text-shadow:
+    //     2px 2px 4px rgba(250, 167, 86, 0.5),
+    //     -2px -2px 4px rgba(250, 167, 86, 0.5),
+    //     2px -2px 4px rgba(250, 167, 86, 0.5),
+    //     -2px 2px 4px rgba(250, 167, 86, 0.5);
+}
+
+
+.reveal .author,
+.reveal .institute,
+.reveal .date {
+    margin-top:  0%;
+    text-align: right;
+    margin-right: -100pt;
+
+    // text-shadow:
+    //     2px 2px 2px rgba(250, 167, 86, 0.3),
+    //     -2px -2px 2px rgba(250, 167, 86, 0.3),
+    //     2px -2px 2px rgba(250, 167, 86, 0.3),
+    //     -2px 2px 2px rgba(250, 167, 86, 0.3);
+
+}
+
+
+.center-align * {
+    text-align: center;
+}
+
+// .imageheading {
+//     margin-bottom: -30px;
+// }
+
+
+// @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Cormorant:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Vollkorn+SC:wght@400;600;700;900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    background-color: #yourColor; /* Replace #yourColor with the desired background color */
+    overflow: hidden;
+}
+
+.reveal .remove_background {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply; /* This blends the image with the background color */
+}
