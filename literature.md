@@ -6,7 +6,7 @@ This literature was kicked off by two papers by Zollman:
 
 The existing follow-up literature can roughly be divided into three strands:
 1. A strand on robustness:
-    - robustness under changes in parameter settings (Rosenstock et al., 2016), 
+    - robustness under changes in parameter settings (Rosenstock et al., 2017), 
     - robustness under changes in modelling choices (Kummerfeld & Zollman, 2016; Frey & Šešelja, 2018, 2020; 
 2. A strand on conformity: (Zollman, 2010; Mohseni & Williams, 2021; Weatherall & O’Connor, 2021; Fazelpour & Steel, 2022)
 3. A strand on epistemically impure agents (including financial interests) (Holman & Bruner, 2015; Weatherall, O’Connor & Bruner, 2020)
@@ -22,18 +22,18 @@ Simulation studies in network epistemology of science have focused on whether an
 Social epistemologists and philosophers of science are increasingly interested in social structures and their impact on epistemic practices. In recent years, philosophers have used agent-based models to study whether and when high connectivity, convergence speed and conformity produce epistemically reliable groups. Zollman (2007, 2010) pioneered this research field and argued that ‘in many cases a community made up of less informed individuals is more reliable at learning correct answers’ and ‘there is a robust tradeoff between speed and reliability that may be impossible to overcome’. Hence, high connectivity and speed of convergence may reduce epistemic reliability. 
 
 These findings have been scrutinized. 
-On the one hand, Rosenstock et al. (2016) demonstrate that these results are not robust under changes in parameter settings (Rosenstock et al., 2016). They argue that the results only obtain in difficult learning situations, where good information is hard to come by. 
+On the one hand, Rosenstock et al. (2017) demonstrate that these results are not robust under changes in parameter settings (Rosenstock et al., 2017). They argue that the results only obtain in difficult learning situations, where good information is hard to come by. 
 On the other hand, Frey and Šešelja (2018, 2020) illustrate that these results are also not robust under changes in idealizing assumptions even in difficult learning situations (also see Kummerfeld & Zollman, 2016).
 The consensus seems to be that the optimal network structure is highly context dependent (see also, Zollman, 2013).
 
 The epistemic value of modelling and simulations heavily depends on the empirical adequacy of these models and simulations (Weisberg, 2013; Ylikoski & Aydinonat, 2014; Bokulich, 2017; Frey and Šešelja, 2018, Frigg & Hartmann, 2020).[^*] From this perspective, the existing literature faces four interrelated challenges: 
 
-1. Virtually all simulation studies restrict the size of the community to 10 agents -- (Rosenstock et al., 2016) is a notable exception, but they restrict the size to 100 agents;
+1. Virtually all simulation studies restrict the size of the community to 10 agents -- (Rosenstock et al., 2017) is a notable exception, but they restrict the size to 100 agents;
 2. Virtually all simulation studies restrict their analysis to two or three simplistic network structures (i.e., the cycle, wheel and complete network) even though these simplistic structures are rarely empirically observed -- (Zollman, 2007, Sect. 3.2) and (Weatherall & O’Connor, 2021) are notable exceptions; 
 3. Virtually all empirical networks are scale-free (i.e., have an extremely unequal degree distribution) (Albert and Barabási, 2002); and
 4. There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks (ANY EXCEPTIONS?). 
 
-In this paper, we aim to address these challenges by studying whether and when degree-inequality affects the epistemic reliability of groups. Let us call this the *degree-inequality effect*: the (hypothesized) proposition that lower levels of degree-inequality produce more reliable groups. This contribution complements existing work that focuses on robustness analyses (Rosenstock et al., 2016; Frey and Šešelja, 2018, 2020), the effect of conformity (Zollman, 2010; Mohseni & Williams, 2021; Weatherall & O’Connor, 2021; Fazelpour & Steel, 2022), and the impact of epistemically impure agents (including financial interests) (Holman & Bruner, 2015; Weatherall, O’Connor & Bruner, 2020). 
+In this paper, we aim to address these challenges by studying whether and when degree-inequality affects the epistemic reliability of groups. Let us call this the *degree-inequality effect*: the (hypothesized) proposition that lower levels of degree-inequality produce more reliable groups. This contribution complements existing work that focuses on robustness analyses (Rosenstock et al., 2017; Frey and Šešelja, 2018, 2020), the effect of conformity (Zollman, 2010; Mohseni & Williams, 2021; Weatherall & O’Connor, 2021; Fazelpour & Steel, 2022), and the impact of epistemically impure agents (including financial interests) (Holman & Bruner, 2015; Weatherall, O’Connor & Bruner, 2020). 
 
 To the best of our knowledge, there is one precursor that studies the degree-inequality effect:[^1] Zollman (2007, Sect. 3.1) finds that the wheel does better than the complete network, which suggests that degree-inequality might be epistemically beneficial. However, since the cycle does better than the wheel, he concludes that low connectivity (not degree-inequality) produces the epistemic benefits. In any case, we interpret this as tangible evidence that degree-equality might be epistemically beneficial. Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and studies which network statistics are strong predictors for epistemic reliability. He finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.[^2] However, this finding is vulnerable to some issues mentioned above: the size of the communities is very small and there is no attempt to empirically calibrate the finding towards empirical networks. One of our central contributions is that we attempt to empirically calibrate these findings. 
 
