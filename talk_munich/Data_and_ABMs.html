@@ -30,27 +30,7 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+  </style>
   <link rel="stylesheet" href="Data_and_ABMs_files/libs/revealjs/dist/theme/quarto.css">
   <link href="Data_and_ABMs_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Data_and_ABMs_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -369,9 +349,70 @@
     </section>
 <section id="general-introduction" class="title-slide slide level1 center">
 <h1>General Introduction</h1>
+
+</section>
+
+<section id="network-epistemology" class="title-slide slide level1 center">
+<h1>Network epistemology</h1>
 <ul>
-<li class="fragment">Something about what people in the literature have been doing and what do we do differently</li>
-<li class="fragment">dsafadsdf <span class="citation" data-cites="bieriWasBleibtAnalytischen2007">Peter Bieri <a href="#/section-1" role="doc-biblioref" onclick=""><span>“<span>Was bleibt von der analytischen Philosophie?</span>”</span> <em>Deutsche Zeitschrift f<span>ü</span>r Philosophie</em> 55, no. 3 (January 2007)</a>.</span></li>
+<li class="fragment">Traditional epistemology focuses on individual rationality
+<ul>
+<li class="fragment">What is the proper response to evidence?</li>
+</ul></li>
+<li class="fragment">Social epistemology broadens the perspective
+<ul>
+<li class="fragment">What is the proper <em>individual</em> response to testimony or disagreement?</li>
+<li class="fragment">Which properties of <em>groups</em> makes them better or worse epistemically?</li>
+</ul></li>
+<li class="fragment">Network epistemology targets the structure of communication
+<ul>
+<li class="fragment">Which communication <em>structures</em> are best?</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="network-epistemology-1" class="title-slide slide level1 center">
+<h1>Network epistemology</h1>
+<ul>
+<li class="fragment">Kicked off by Zollman (2007, 2010) who uses agent-based modelling and simulations</li>
+<li class="fragment">Main findings:
+<ul>
+<li class="fragment">Less connectivity can lead to more reliable groups</li>
+<li class="fragment">There is a robust tradeoff between speed of convergence and reliability</li>
+</ul></li>
+<li class="fragment">The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups</li>
+</ul>
+</section>
+
+<section id="scale-free-networks" class="title-slide slide level1 center">
+<h1>Scale-free networks</h1>
+<ul>
+<li class="fragment">The existing literature typically focuses on three simplistic network structures: the cycle, wheel and complete network [INSERT PICTURES?]</li>
+<li class="fragment">The epistemic value of modelling and simulations depends heavily on their empirical adequacy</li>
+<li class="fragment">But, these simplistic network structures are rarely observed in the real world</li>
+<li class="fragment">Real-world networks are often/virtually always <em>scale-free</em>:
+<ul>
+<li class="fragment">their degree distribution follows a power law (which is highly unequal)</li>
+</ul></li>
+<li class="fragment">Our focus is on the <em>degree-equality effect</em>:
+<ul>
+<li class="fragment">whether and when higher levels of degree equality leads to epistemically better groups</li>
+</ul></li>
+</ul>
+<p>[INSERT PICTURE OR EXAMPLE OF A SCALE-FREE NETWORK?]</p>
+</section>
+
+<section id="empirically-sensitive-robustness" class="title-slide slide level1 center">
+<h1>Empirically sensitive robustness</h1>
+<ul>
+<li class="fragment">The overall aim of our study is to see whether and when the degree-equality effect is robust in an empirically sensitive way</li>
+<li class="fragment">We aim to address three challenges:
+<ul>
+<li class="fragment">Existing work in network epistemology focuses on small networks (typically up to 10 agents) whereas real scientific networks are much larger</li>
+<li class="fragment">Existing work in network epistemology focus on simple network structures even though virtually all empirical networks are scale-free</li>
+<li class="fragment">There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks</li>
+</ul></li>
+<li class="fragment">We propose a two-pronged analysis by analysing both (a) artificial networks <em>and</em> (b) empirical networks</li>
 </ul>
 </section>
 
@@ -385,6 +426,99 @@
 </div>
 <div class="r-fit-text">
 <p>networked communities?</p>
+</div>
+</section>
+
+<section id="results-table" class="title-slide slide level1 center">
+<h1>Results table?</h1>
+<div class="column" style="width:40%;">
+<table>
+<colgroup>
+<col style="width: 68%">
+<col style="width: 31%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Number of Samples:</strong></td>
+<td>350</td>
+</tr>
+<tr class="even">
+<td><strong>Number of Features:</strong></td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td><strong>Effective DoF:</strong></td>
+<td>9.363</td>
+</tr>
+<tr class="even">
+<td><strong>Log Likelihood:</strong></td>
+<td>-3091.357</td>
+</tr>
+<tr class="odd">
+<td><strong>AIC:</strong></td>
+<td>6203.44</td>
+</tr>
+<tr class="even">
+<td><strong>AICc:</strong></td>
+<td>6204.136</td>
+</tr>
+<tr class="odd">
+<td><strong>GCV:</strong></td>
+<td>0.046</td>
+</tr>
+<tr class="even">
+<td><strong>Scale:</strong></td>
+<td>0.044</td>
+</tr>
+<tr class="odd">
+<td><strong>Pseudo R-Squared:</strong></td>
+<td>0.853</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="column" style="width:40%;">
+<table>
+<thead>
+<tr class="header">
+<th>Feature Function</th>
+<th>SE</th>
+<th>P &gt; x</th>
+<th>Sig. Code</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>s(0)</strong></td>
+<td>0.098748</td>
+<td>0.872848</td>
+<td>0.000800</td>
+<td>***</td>
+</tr>
+<tr class="even">
+<td><strong>s(1)</strong></td>
+<td>0.029018</td>
+<td>0.654016</td>
+<td>0.000000</td>
+<td>***</td>
+</tr>
+<tr class="odd">
+<td><strong>s(2)</strong></td>
+<td>0.043616</td>
+<td>0.644693</td>
+<td>0.000000</td>
+<td>***</td>
+</tr>
+<tr class="even">
+<td><strong>s(3)</strong></td>
+<td>0.043630</td>
+<td>0.770473</td>
+<td>0.000000</td>
+<td>***</td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 
@@ -419,7 +553,46 @@
 ![](images/%E2%80%8ESFI%20AGWCSS.%E2%80%8E001.png){width=130% fig-align="center"} -->
 </section>
 
-<section id="section-1" class="title-slide slide level1 smaller scrollable">
+<section id="previous-work-in-network-epistemology" class="title-slide slide level1 center">
+<h1>Previous Work in Network Epistemology</h1>
+<ul>
+<li class="fragment">The literature on network epistemology can be (roughly) divided into:
+<ul>
+<li class="fragment">A strand on robustness:
+<ul>
+<li class="fragment">robustness under changes in parameter settings (Rosenstock et al., 2017),</li>
+<li class="fragment">robustness under changes in modelling choices (Kummerfeld &amp; Zollman, 2016; Frey &amp; Šešelja, 2018, 2020;</li>
+</ul></li>
+<li class="fragment">A strand on conformity: (Zollman, 2010; Mohseni &amp; Williams, 2021; Weatherall &amp; O’Connor, 2021; Fazelpour &amp; Steel, 2022)</li>
+<li class="fragment">A strand on epistemically impure agents (including financial interests) (Holman &amp; Bruner, 2015; Weatherall, O’Connor &amp; Bruner, 2020)</li>
+</ul></li>
+<li class="fragment">Our work complements this literature in at least two ways
+<ul>
+<li class="fragment">we focus on the degree equality effect</li>
+<li class="fragment">we study empirically sensitive robustness</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="one-precursor" class="title-slide slide level1 center">
+<h1>One Precursor</h1>
+<ul>
+<li class="fragment">To the best of our knowledge there is one precursor on the degree equality effect</li>
+<li class="fragment">Zollman (2007, Sect. 3.1) finds that
+<ul>
+<li class="fragment">the wheel does better than the complete network, which suggests that degree-inequality might be epistemically beneficial.</li>
+<li class="fragment">However, since the cycle does better than the wheel, he concludes that low connectivity (not degree-inequality) produces the epistemic benefits.</li>
+</ul></li>
+<li class="fragment">Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.</li>
+<li class="fragment">Our results:
+<ul>
+<li class="fragment">confirm Zollman’s finding on our artificial networks</li>
+<li class="fragment">but disconfirms Zollman’s finding on empirical networks</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -434,11 +607,6 @@ Thank you!
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-bieriWasBleibtAnalytischen2007" class="csl-entry" role="listitem">
-Bieri, Peter. <span>“<a href="https://doi.org/10.1524/dzph.2007.55.3.333"><span>Was bleibt von der analytischen Philosophie?</span></a>”</span> <em>Deutsche Zeitschrift f<span>ü</span>r Philosophie</em> 55, no. 3 (January 2007).
 </div>
 </div>
 </section>
