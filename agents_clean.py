@@ -64,6 +64,7 @@ class Agent:
         self.credence_history = []
         self.credence_history.append(self.credence)
         self.inner_perceptron = Perceptron(input_size=2, learning_rate=0.1, epochs=10)
+        self.epsilon=0.1
         
     def init_bayes(self):
         self.credence: float = rd.uniform(0, 1)
@@ -104,6 +105,17 @@ class Agent:
             self.n_experiments = 0
             self.choice_history.append(0)
 
+    # I am not sure adding epsilon greedy helps because in this case all models will
+    # achieve correct true consensus
+    def egreedy_experiment(self, n_experiments: int):
+        if np.random.rand() < self.epsilon:
+            self.n_success, self.n_experiments = self.uncertainty_problem.experiment(
+                n_experiments
+            )
+            self.choice_history.append(1)
+        else:
+            self.experiment(n_experiments)
+            
     def bayes_update(self, n_success, n_experiments):
         """
         Updates the agent's credence using Bayes' rule. The basic setting is that the
