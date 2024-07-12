@@ -92,3 +92,27 @@ def randomize_network_v2(G, p_rewiring):
     G_new.remove_edges_from(list(to_remove_set))
     G_new.add_edges_from(list(new_edges_set))
     return G_new
+
+def densify_network(G,p_densify,valence=True):
+    true_edges = list(G.edges()).copy()
+    rd.shuffle(true_edges)
+    edges_set = set(true_edges)
+    edges_to_remove_set = set() # only used in the negative valence
+    new_edges_set = set() # only used in the positive valence
+    if valence==False:        
+        edges_set = set(edges)
+        for old_edge in true_edges:
+            if rd.random() < p_densify:  # p probability to rewire an edge
+                to_remove_set.add(old_edge)
+    if valence==True:
+        # Get all possible edges for the complete graph with the same nodes
+        all_possible_edges = set(nx.complete_graph(G.nodes).edges())
+        for new_edge in all_possible_edges:
+            if new_edge not in edges_set: #namely, if its truly new
+                if rd.random() < p_densify:
+                    new_edges_set.add(new_edge)
+    # Update the graph with new edges
+    G_new = G.copy() # not doing this because it takes up memory
+    G_new.remove_edges_from(list(to_remove_set))
+    G_new.add_edges_from(list(new_edges_set))
+    return G_new
