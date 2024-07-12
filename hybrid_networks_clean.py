@@ -98,7 +98,7 @@ def densify_network(G,p_densify,valence=True):
     true_edges = list(G.edges()).copy()
     rd.shuffle(true_edges)
     edges_set = set(true_edges)
-    edges_to_remove_set = set() # only used in the negative valence
+    to_remove_set = set() # only used in the negative valence
     new_edges_set = set() # only used in the positive valence
     print('setup is done')
     if valence==False:        
