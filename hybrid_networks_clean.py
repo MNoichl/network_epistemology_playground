@@ -94,13 +94,12 @@ def randomize_network_v2(G, p_rewiring):
     G_new.add_edges_from(list(new_edges_set))
     return G_new
 
-def densify_network(G,p_densify,valence=True):
+def densify_network(G,p_densify,valence=True,all_possible_edges=set()):
     true_edges = list(G.edges()).copy()
     rd.shuffle(true_edges)
     edges_set = set(true_edges)
     to_remove_set = set() # only used in the negative valence
-    new_edges_set = set() # only used in the positive valence
-    print('setup is done')
+    new_edges_set = set() # only used in the positive valence)
     if valence==False:        
         edges_set = set(edges)
         for old_edge in true_edges:
@@ -108,13 +107,10 @@ def densify_network(G,p_densify,valence=True):
                 to_remove_set.add(old_edge)
     if valence==True:
         # Get all possible edges for the complete graph with the same nodes
-        print('Computing all potential edges...')
-        all_possible_edges = set(nx.complete_graph(G.nodes).edges())
-        print('found all edges')
+        #all_possible_edges = set(nx.complete_graph(G.nodes).edges())
         all_new_potential_edges = all_possible_edges - edges_set
         num_elements_to_sample = int(p_densify * len(all_new_potential_edges))
         new_edges_set = set(rd.sample(all_new_potential_edges, num_elements_to_sample))
-        print('found all new edges')
     # Update the graph with new edges
     G_new = G.copy() # not doing this because it takes up memory
     G_new.remove_edges_from(list(to_remove_set))
