@@ -94,9 +94,9 @@ def randomize_network_v2(G, p_rewiring):
     G_new.add_edges_from(list(new_edges_set))
     return G_new
 
-def densify_network(G,p_densify,valence=True,all_possible_edges=set()):
-    true_edges = list(G.edges()).copy()
-    edges_set = set(true_edges)
+def densify_network(G,p_densify,valence=True,all_new_potential_edges=set()):
+    #true_edges = list(G.edges()).copy()
+    edges_set = set(G.edges().copy())
     to_remove_set = set() # only used in the negative valence
     new_edges_set = set() # only used in the positive valence)
     if valence==False:        
@@ -104,12 +104,6 @@ def densify_network(G,p_densify,valence=True,all_possible_edges=set()):
             if rd.random() < p_densify:  # p probability to rewire an edge
                 to_remove_set.add(old_edge)
     if valence==True:
-        # Get all possible edges for the complete graph with the same nodes
-        #all_possible_edges = set(nx.complete_graph(G.nodes).edges())
-        all_new_potential_edges = all_possible_edges - edges_set
-        # Remove pairs where both elements are the same
-        identical_pairs = {(num, num) for num in set(G.nodes)}
-        all_new_potential_edges = all_new_potential_edges - identical_pairs
         # now sample from those in proportion to densify
         num_elements_to_sample = int(p_densify * len(all_new_potential_edges))
         new_edges_set = set(rd.sample(all_new_potential_edges, num_elements_to_sample))
