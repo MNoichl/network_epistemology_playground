@@ -94,13 +94,13 @@ def randomize_network_v2(G, p_rewiring):
     G_new.add_edges_from(list(new_edges_set))
     return G_new
 
-def densify_network(G,p_densify,valence=True,all_new_potential_edges=set()):
+def densify_network(G,p_densify,valence=True,actual_edges=set(),
+                    all_new_potential_edges=set()):
     #true_edges = list(G.edges()).copy()
-    edges_set = set(G.edges().copy())
     to_remove_set = set() # only used in the negative valence
     new_edges_set = set() # only used in the positive valence)
     if valence==False:        
-        for old_edge in true_edges:
+        for old_edge in actual_edges:
             if rd.random() < p_densify:  # p probability to rewire an edge
                 to_remove_set.add(old_edge)
     if valence==True:
