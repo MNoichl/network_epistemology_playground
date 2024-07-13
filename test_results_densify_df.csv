@@ -1,0 +1,3 @@
+n_agents,p_rewiring,densify_valence,rewiring_type,uncertainty,n_experiments,mean_degree,true_consensus,convergence_step,agent_type
+133403,0.655759981902881,False,density,0.0015034512429248812,9155,4.0499838834209125,0.45654145708867117,195,bayes
+133403,0.33015744731294694,False,density,0.01957587741146761,3154,7.887498781886464,0.5776781631597491,9,bayes

@@ -107,8 +107,10 @@ def densify_network(G,p_densify,valence=True,all_possible_edges=set()):
         # Get all possible edges for the complete graph with the same nodes
         #all_possible_edges = set(nx.complete_graph(G.nodes).edges())
         all_new_potential_edges = all_possible_edges - edges_set
-        num_elements_to_sample = int(p_densify * len(all_new_potential_edges))
-        new_edges_set = set(rd.sample(all_new_potential_edges, num_elements_to_sample))
+        # Remove pairs where both elements are the same
+        filtered_pairs = {pair for pair in all_new_potential_edges if pair[0] != pair[1]}
+        num_elements_to_sample = int(p_densify * len(filtered_pairs))
+        new_edges_set = set(rd.sample(filtered_pairs, num_elements_to_sample))
     # Update the graph with new edges
     G_new = G.copy() # not doing this because it takes up memory
     G_new.remove_edges_from(list(to_remove_set))
