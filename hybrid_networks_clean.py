@@ -101,7 +101,6 @@ def densify_network(G,p_densify,valence=True,all_possible_edges=set()):
     to_remove_set = set() # only used in the negative valence
     new_edges_set = set() # only used in the positive valence)
     if valence==False:        
-        edges_set = set(edges)
         for old_edge in true_edges:
             if rd.random() < p_densify:  # p probability to rewire an edge
                 to_remove_set.add(old_edge)
