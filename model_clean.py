@@ -88,8 +88,8 @@ class Model:
         def stop_condition2(self):
             agents_choices = [agent.choice_history for agent in self.agents]
             length = len(agents_choices[0])
-            previous_choices = [hist[lenght-2] for hist in agents_choices]
-            present_choices = [hist[lenght-1] for hist in agents_choices]
+            previous_choices = [hist[length-2] for hist in agents_choices]
+            present_choices = [hist[length-1] for hist in agents_choices] # this shouldnt' have worked due to a typo. Did we use this somewhere? Investigate! (MN)
             return np.allclose(np.array(previous_choices), np.array(present_choices))
             
         def true_consensus_condition(credences: np.array) -> float:

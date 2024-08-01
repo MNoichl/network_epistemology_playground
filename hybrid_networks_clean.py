@@ -1,4 +1,5 @@
 import random as rd
+from random import sample
 import networkx as nx
 
 
@@ -72,8 +73,7 @@ def randomized_barabasi_albert_graph(n_nodes,n_edges_to_add,randomization_probab
     G = nx.barabasi_albert_graph(n_nodes, n_edges_to_add)
     return randomize_network_v2(G, randomization_probability)
 
-def randomize_network_v2(G, p_rewiring):
-    
+def randomize_network_v2(G, p_rewiring):   
     edges = list(G.edges()).copy()
     rd.shuffle(edges)
     edges_set = set(edges)
@@ -87,6 +87,25 @@ def randomize_network_v2(G, p_rewiring):
             while (new_edge in new_edges_set) or (new_edge[0] == new_edge[1]):
                 new_edge = (rd.choice(nodes),rd.choice(nodes))
             new_edges_set.add(new_edge)
+    # Update the graph with new edges
+    G_new = G.copy() # not doing this because it takes up memory
+    G_new.remove_edges_from(list(to_remove_set))
+    G_new.add_edges_from(list(new_edges_set))
+    return G_new
+
+def densify_network(G,p_densify,valence=True,actual_edges=set(),
+                    all_new_potential_edges=set()):
+    #true_edges = list(G.edges()).copy()
+    to_remove_set = set() # only used in the negative valence
+    new_edges_set = set() # only used in the positive valence)
+    if valence==False:        
+        for old_edge in actual_edges:
+            if rd.random() < p_densify:  # p probability to rewire an edge
+                to_remove_set.add(old_edge)
+    if valence==True:
+        # now sample from those in proportion to densify
+        num_elements_to_sample = int(p_densify * len(all_new_potential_edges))
+        new_edges_set = set(rd.sample(all_new_potential_edges, num_elements_to_sample))
     # Update the graph with new edges
     G_new = G.copy() # not doing this because it takes up memory
     G_new.remove_edges_from(list(to_remove_set))

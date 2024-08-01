@@ -7,7 +7,7 @@ This literature was kicked off by two papers by Zollman:
 The existing follow-up literature can roughly be divided into three strands:
 1. A strand on robustness:
     - robustness under changes in parameter settings (Rosenstock et al., 2017), 
-    - robustness under changes in modelling choices (Kummerfeld & Zollman, 2016; Frey & Šešelja, 2018, 2020; 
+    - robustness under changes in modelling choices (Kummerfeld & Zollman, 2016; Frey & Šešelja, 2018, 2020); 
 2. A strand on conformity: (Zollman, 2010; Mohseni & Williams, 2021; Weatherall & O’Connor, 2021; Fazelpour & Steel, 2022)
 3. A strand on epistemically impure agents (including financial interests) (Holman & Bruner, 2015; Weatherall, O’Connor & Bruner, 2020)
 

@@ -1,0 +1,196 @@
+---
+title: "Something something powerlaws"
+author: "Hein Duijf, Max Noichl & Ignacio Quintaja"
+institute: ""
+date: 2024-6-19
+
+format: 
+    revealjs:
+        template-partials:
+            - title-slide.html
+        title-slide-attributes:
+            data-background-image: images/background_failure.png
+            data-background-size: cover
+            data-background-opacity: "1."
+
+        theme: [default, custom.scss]
+        navigation-mode: vertical
+        include-in-header:  
+            text: |
+                <style>
+                .center-xy {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                width: auto; /* Maintain aspect ratio */
+                height: auto; /* Maintain aspect ratio */
+                box-sizing: border-box; /* Include padding/border in size */
+                max-height: none;
+                }
+                </style>
+        auto-stretch: false
+        incremental: true 
+bibliography: my_lib.bib
+csl: the-journal-of-modern-history.csl
+cite-method: citeproc
+dependencies:
+  - "custom.scss"
+controls: true
+width: 1400 # 1060
+height: 1000 # 700
+margin: 0.15 # 1
+min-scale: 0.2
+max-scale: 1.6
+# background-image: "images/background_egg.png"
+---
+
+
+# General Introduction
+
+# Network epistemology
+* Traditional epistemology focuses on individual rationality 
+    - What is the proper response to evidence?
+* Social epistemology broadens the perspective 
+    - What is the proper *individual* response to testimony or disagreement?
+    - Which properties of *groups* makes them better or worse epistemically?
+* Network epistemology targets the structure of communication
+    - Which communication *structures* are best?
+
+# Network epistemology
+* Kicked off by Zollman (2007, 2010) who uses agent-based modelling and simulations
+* Main findings:
+    - Less connectivity can lead to more reliable groups
+    - There is a robust tradeoff between speed of convergence and reliability
+* The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups 
+
+# Scale-free networks
+* The existing literature typically focuses on three simplistic network structures: the cycle, wheel and complete network [INSERT PICTURES?]
+* The epistemic value of modelling and simulations depends heavily on their empirical adequacy
+* But, these simplistic network structures are rarely observed in the real world
+* Real-world networks are often/virtually always *scale-free*: 
+    - their degree distribution follows a power law (which is highly unequal)
+* Our focus is on the *degree-equality effect*:
+    - whether and when higher levels of degree equality leads to epistemically better groups
+
+[INSERT PICTURE OR EXAMPLE OF A SCALE-FREE NETWORK?]
+
+# Empirically sensitive robustness
+* The overall aim of our study is to see whether and when the degree-equality effect is robust in an empirically sensitive way
+* We aim to address three challenges:
+    - Existing work in network epistemology focuses on small networks (typically up to 10 agents) whereas real scientific networks are much larger
+    - Existing work in network epistemology focus on simple network structures even though virtually all empirical networks are scale-free
+    - There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks
+* We propose a two-pronged analysis by analysing both (a) artificial networks *and* (b) empirical networks
+
+#
+::: {.r-fit-text}
+Dow does <span class="highlight"> Degree Distribution </span>
+:::
+::: {.r-fit-text}
+affect the epistemic performance of
+:::
+::: {.r-fit-text}
+networked communities?
+:::
+
+
+
+# Results table?
+::: {.column width="40%"}
+
+| | |
+|-------------------------------|--------------|
+| **Number of Samples:**                      | 350                                                       |
+| **Number of Features:**                     | 3                                                    |
+| **Effective DoF:**                          | 9.363                                                    |
+| **Log Likelihood:**                         | -3091.357                                                |
+| **AIC:**                                    | 6203.44                                                 |
+| **AICc:**                                   | 6204.136                                                 |
+| **GCV:**                                    | 0.046                                                    |
+| **Scale:**                                  | 0.044                                                    |
+| **Pseudo R-Squared:**                       | 0.853                                                    |
+:::
+::: {.column width="40%"}
+| Feature Function | SE | P > x | Sig. Code |
+|------------------|--------|------|-------|-----------|
+| **s(0)**         | 0.098748  | 0.872848  | 0.000800  | *** |
+| **s(1)**         | 0.029018  | 0.654016  | 0.000000  | *** |
+| **s(2)**         | 0.043616  | 0.644693  | 0.000000  | *** |
+| **s(3)**         | 0.043630  | 0.770473  | 0.000000  | *** |
+:::
+
+# Main points
+* There is a significant effect of randomizing, on empirical networks. This is one philosophical conversation.
+* There does not seem to be an effect in randomizing, for generated/simulated networks. This is another philosophical conversation.
+
+# Methods
+We simulate a very specific philsci scenario, namely when the community has a default theory and there is a competitor entering the game. Also this is tied to the philosophical examples we picked.
+We consider randomizing networks as the main method.
+We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness)
+
+
+We run simulations on empirical networks.
+
+
+# Results on Simulated Networks (~ 2 slides)
+
+Show results (pretty plots are valuable here), namely now effect. (We can try a few more simulations here too)
+Brief discussion on the fact that the parameter space is too big, and the simulated networks can be very different from real life networks.
+
+# Results on Empirical Networks (~ 5 slides)
+
+Explain the two case studies that we selected, and why.
+Show visualizations of the networks, and the loglog plots. Emphasize how unequally distributed they are.
+Show pretty plots of the results.
+Brief discussion of what might explain the effects, as a segway to the next section.
+
+# Discussion (~5 slides)
+Proper discussion on what explains the effects, how robust the results are, and how to move forward with the research question. 
+I am not entirely sure what explains the effects.
+Proper discussion of the fact that how possibly explanations might be deceiving, and that empirically informed approaches are better.
+
+
+
+
+
+<!-- #
+![](images/%E2%80%8ESFI%20AGWCSS.%E2%80%8E001.png){width=130% fig-align="center"} -->
+
+
+
+# Previous Work in Network Epistemology
+* The literature on network epistemology can be (roughly) divided into:
+    - A strand on robustness:
+        - robustness under changes in parameter settings (Rosenstock et al., 2017), 
+        - robustness under changes in modelling choices (Kummerfeld & Zollman, 2016; Frey & Šešelja, 2018, 2020; 
+    - A strand on conformity: (Zollman, 2010; Mohseni & Williams, 2021; Weatherall & O’Connor, 2021; Fazelpour & Steel, 2022)
+    - A strand on epistemically impure agents (including financial interests) (Holman & Bruner, 2015; Weatherall, O’Connor & Bruner, 2020)
+* Our work complements this literature in at least two ways
+    - we focus on the degree equality effect
+    - we study empirically sensitive robustness
+
+# One Precursor
+
+* To the best of our knowledge there is one precursor on the degree equality effect
+* Zollman (2007, Sect. 3.1) finds that 
+    - the wheel does better than the complete network, which suggests that degree-inequality might be epistemically beneficial. 
+    - However, since the cycle does better than the wheel, he concludes that low connectivity (not degree-inequality) produces the epistemic benefits. 
+* Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.
+* Our results:
+    - confirm Zollman’s finding on our artificial networks
+    - but disconfirms Zollman’s finding on empirical networks
+
+
+
+
+# 
+
+![](images/programming_owl_transparent.png){width=100% fig-align="center"}
+
+<div style="text-align: center;">
+<h1>Thank you!</h1>
+</div>
+
