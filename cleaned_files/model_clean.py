@@ -119,7 +119,7 @@ class Model:
                 break
             self.conclusion = true_consensus_condition(credences_post)  # We should set this even if we don't break, right??? - MN
         
-        #self.add_agent_history()
+        self.add_agent_history()
             
 
     def step(self):
