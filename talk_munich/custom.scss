@@ -86,16 +86,16 @@ $small-caps-font: "Vollkorn SC", "Book Antiqua", Palatino, FreeSerif, serif !def
 
 //   Citation formatting
 span.citation, span.citation *  {
-    font-family: $presentation-heading-font, sansserif !important;
-    font-size: 20pt;
-    line-height: .2 !important; // Adjust line-height for better alignment
+    // font-family: $presentation-heading-font, sansserif !important;
+    // font-size: 20pt;
+    // line-height: .2 !important; // Adjust line-height for better alignment
 
 }
 
 
 
   .reveal .title {
-    margin-top:  0%;
+    margin-top:  -30%;
     text-align: right;
     margin-bottom: 5%;
     letter-spacing: 0.15em !important;
@@ -142,11 +142,11 @@ span.citation, span.citation *  {
 
 
 
-.image-container {
-    position: relative;
-    display: inline-block;
-    background-color: #yourColor; /* Replace #yourColor with the desired background color */
-    overflow: hidden;
+.reveal  .image-container {
+    // position: relative;
+    // display: inline-block;
+    background-color: $body-bg; /* Replace #yourColor with the desired background color */
+    // overflow: hidden;
 }
 
 .reveal .remove_background {

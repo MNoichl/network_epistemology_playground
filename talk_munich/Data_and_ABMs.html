@@ -10,9 +10,9 @@
 <link href="Data_and_ABMs_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.554">
 
-  <meta name="author" content="Hein Duijf, Max Noichl &amp; Ignacio Quintaja">
+  <meta name="author" content="Max Noichl, Ignacio Quintana &amp; Hein Duijf">
   <meta name="dcterms.date" content="2024-06-19">
-  <title>Something something powerlaws</title>
+  <title>Epistemology on Real Networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,7 +30,92 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="Data_and_ABMs_files/libs/revealjs/dist/theme/quarto.css">
   <link href="Data_and_ABMs_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Data_and_ABMs_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -340,16 +425,22 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="images/background_failure.png" data-background-opacity="1." data-background-size="cover" class="center">
+<section id="title-slide" data-background-image="images/background_image_front.png" data-background-opacity="1." data-background-size="cover" class="center">
     
-    <h1 class="title">Something something powerlaws</h1>
-        <p class="author">Hein Duijf, Max Noichl &amp; Ignacio Quintaja</p>
+    <h1 class="title">Epistemology on Real Networks</h1>
+        <p class="author">Max Noichl, Ignacio Quintana &amp; Hein Duijf</p>
         <p class="institute"></p>
         <p class="date">2024-06-19</p>
     </section>
-<section id="general-introduction" class="title-slide slide level1 center">
-<h1>General Introduction</h1>
-
+<section id="outline" class="title-slide slide level1 center">
+<h1>Outline</h1>
+<ul>
+<li class="fragment">Intro: Network epistemology</li>
+<li class="fragment">Robustness</li>
+<li class="fragment">Artificial network models</li>
+<li class="fragment">Real networks</li>
+<li class="fragment">Some conclusions</li>
+</ul>
 </section>
 
 <section id="network-epistemology" class="title-slide slide level1 center">
@@ -359,240 +450,462 @@
 <ul>
 <li class="fragment">What is the proper response to evidence?</li>
 </ul></li>
-<li class="fragment">Social epistemology broadens the perspective
-<ul>
-<li class="fragment">What is the proper <em>individual</em> response to testimony or disagreement?</li>
-<li class="fragment">Which properties of <em>groups</em> makes them better or worse epistemically?</li>
-</ul></li>
-<li class="fragment">Network epistemology targets the structure of communication
+<li class="fragment">Network epistemology can target the structure of communication
 <ul>
 <li class="fragment">Which communication <em>structures</em> are best?</li>
 </ul></li>
+<li class="fragment">Kicked off by <span class="citation" data-cites="zollmanCommunicationStructureEpistemic2007">Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2007</a>)</span> who uses agent-based modelling and simulations</li>
 </ul>
 </section>
 
-<section id="network-epistemology-1" class="title-slide slide level1 center">
-<h1>Network epistemology</h1>
+<section id="recap-zollman-2007" class="title-slide slide level1 center">
+<h1>Recap: Zollman (2007)</h1>
 <ul>
-<li class="fragment">Kicked off by Zollman (2007, 2010) who uses agent-based modelling and simulations</li>
+<li class="fragment">Agents (scientist) evaluate two competing methods, with similar, but slightly different quality. (Bandit-problem mirroring clinical trials). They communicate their evidence on a network.</li>
+<li class="fragment">Agents cease evaluating methods they believe to be inferior.</li>
 <li class="fragment">Main findings:
 <ul>
-<li class="fragment">Less connectivity can lead to more reliable groups</li>
-<li class="fragment">There is a robust tradeoff between speed of convergence and reliability</li>
+<li class="fragment">Less connectivity can lead to more reliable groups – <strong>Community structure matters!</strong></li>
+<li class="fragment">There is a tradeoff between speed of convergence and reliability</li>
 </ul></li>
-<li class="fragment">The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups</li>
-</ul>
-</section>
-
-<section id="scale-free-networks" class="title-slide slide level1 center">
-<h1>Scale-free networks</h1>
-<ul>
-<li class="fragment">The existing literature typically focuses on three simplistic network structures: the cycle, wheel and complete network [INSERT PICTURES?]</li>
-<li class="fragment">The epistemic value of modelling and simulations depends heavily on their empirical adequacy</li>
-<li class="fragment">But, these simplistic network structures are rarely observed in the real world</li>
-<li class="fragment">Real-world networks are often/virtually always <em>scale-free</em>:
-<ul>
-<li class="fragment">their degree distribution follows a power law (which is highly unequal)</li>
-</ul></li>
-<li class="fragment">Our focus is on the <em>degree-equality effect</em>:
-<ul>
-<li class="fragment">whether and when higher levels of degree equality leads to epistemically better groups</li>
-</ul></li>
-</ul>
-<p>[INSERT PICTURE OR EXAMPLE OF A SCALE-FREE NETWORK?]</p>
-</section>
-
-<section id="empirically-sensitive-robustness" class="title-slide slide level1 center">
-<h1>Empirically sensitive robustness</h1>
-<ul>
-<li class="fragment">The overall aim of our study is to see whether and when the degree-equality effect is robust in an empirically sensitive way</li>
-<li class="fragment">We aim to address three challenges:
-<ul>
-<li class="fragment">Existing work in network epistemology focuses on small networks (typically up to 10 agents) whereas real scientific networks are much larger</li>
-<li class="fragment">Existing work in network epistemology focus on simple network structures even though virtually all empirical networks are scale-free</li>
-<li class="fragment">There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks</li>
-</ul></li>
-<li class="fragment">We propose a two-pronged analysis by analysing both (a) artificial networks <em>and</em> (b) empirical networks</li>
 </ul>
 </section>
 
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
-<div class="r-fit-text">
-<p>Dow does <span class="highlight"> Degree Distribution </span></p>
-</div>
-<div class="r-fit-text">
-<p>affect the epistemic performance of</p>
-</div>
-<div class="r-fit-text">
-<p>networked communities?</p>
-</div>
+<p><em>“Even beyond the problem of maintaining the division of cognitive labor, this model suggests that in some circumstances there is an unintended benefit from scientists being uninformed about experimental results in their field. This is not universally beneficial, however.</em></p>
+<p><em>In circumstances where speed is very important or where we think that our initial estimates are likely very close to the truth, connected groups of scientist will be more reliable. On the other hand, when we want accuracy above all else, we should prefer communities made up of more isolated individuals.”</em> – <span class="citation" data-cites="zollmanCommunicationStructureEpistemic2007">Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2007</a>)</span></p>
 </section>
 
-<section id="results-table" class="title-slide slide level1 center">
-<h1>Results table?</h1>
-<div class="column" style="width:40%;">
-<table>
-<colgroup>
-<col style="width: 68%">
-<col style="width: 31%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><strong>Number of Samples:</strong></td>
-<td>350</td>
-</tr>
-<tr class="even">
-<td><strong>Number of Features:</strong></td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td><strong>Effective DoF:</strong></td>
-<td>9.363</td>
-</tr>
-<tr class="even">
-<td><strong>Log Likelihood:</strong></td>
-<td>-3091.357</td>
-</tr>
-<tr class="odd">
-<td><strong>AIC:</strong></td>
-<td>6203.44</td>
-</tr>
-<tr class="even">
-<td><strong>AICc:</strong></td>
-<td>6204.136</td>
-</tr>
-<tr class="odd">
-<td><strong>GCV:</strong></td>
-<td>0.046</td>
-</tr>
-<tr class="even">
-<td><strong>Scale:</strong></td>
-<td>0.044</td>
-</tr>
-<tr class="odd">
-<td><strong>Pseudo R-Squared:</strong></td>
-<td>0.853</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="column" style="width:40%;">
-<table>
-<thead>
-<tr class="header">
-<th>Feature Function</th>
-<th>SE</th>
-<th>P &gt; x</th>
-<th>Sig. Code</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>s(0)</strong></td>
-<td>0.098748</td>
-<td>0.872848</td>
-<td>0.000800</td>
-<td>***</td>
-</tr>
-<tr class="even">
-<td><strong>s(1)</strong></td>
-<td>0.029018</td>
-<td>0.654016</td>
-<td>0.000000</td>
-<td>***</td>
-</tr>
-<tr class="odd">
-<td><strong>s(2)</strong></td>
-<td>0.043616</td>
-<td>0.644693</td>
-<td>0.000000</td>
-<td>***</td>
-</tr>
-<tr class="even">
-<td><strong>s(3)</strong></td>
-<td>0.043630</td>
-<td>0.770473</td>
-<td>0.000000</td>
-<td>***</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-
-<section id="main-points" class="title-slide slide level1 center">
-<h1>Main points</h1>
-<ul>
-<li class="fragment">There is a significant effect of randomizing, on empirical networks. This is one philosophical conversation.</li>
-<li class="fragment">There does not seem to be an effect in randomizing, for generated/simulated networks. This is another philosophical conversation.</li>
-</ul>
-</section>
-
-<section id="methods" class="title-slide slide level1 center">
-<h1>Methods</h1>
-<p>We simulate a very specific philsci scenario, namely when the community has a default theory and there is a competitor entering the game. Also this is tied to the philosophical examples we picked. We consider randomizing networks as the main method. We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness)</p>
-<p>We run simulations on empirical networks.</p>
-</section>
-
-<section id="results-on-simulated-networks-2-slides" class="title-slide slide level1 center">
-<h1>Results on Simulated Networks (~ 2 slides)</h1>
-<p>Show results (pretty plots are valuable here), namely now effect. (We can try a few more simulations here too) Brief discussion on the fact that the parameter space is too big, and the simulated networks can be very different from real life networks.</p>
-</section>
-
-<section id="results-on-empirical-networks-5-slides" class="title-slide slide level1 center">
-<h1>Results on Empirical Networks (~ 5 slides)</h1>
-<p>Explain the two case studies that we selected, and why. Show visualizations of the networks, and the loglog plots. Emphasize how unequally distributed they are. Show pretty plots of the results. Brief discussion of what might explain the effects, as a segway to the next section.</p>
-</section>
-
-<section id="discussion-5-slides" class="title-slide slide level1 center">
-<h1>Discussion (~5 slides)</h1>
-<p>Proper discussion on what explains the effects, how robust the results are, and how to move forward with the research question. I am not entirely sure what explains the effects. Proper discussion of the fact that how possibly explanations might be deceiving, and that empirically informed approaches are better.</p>
-<!-- #
-![](images/%E2%80%8ESFI%20AGWCSS.%E2%80%8E001.png){width=130% fig-align="center"} -->
-</section>
-
-<section id="previous-work-in-network-epistemology" class="title-slide slide level1 center">
-<h1>Previous Work in Network Epistemology</h1>
-<ul>
-<li class="fragment">The literature on network epistemology can be (roughly) divided into:
+<section id="following-these-strands-in-network-epistemology" class="title-slide slide level1 center">
+<h1>Following these strands in Network Epistemology</h1>
 <ul>
 <li class="fragment">A strand on robustness:
 <ul>
-<li class="fragment">robustness under changes in parameter settings (Rosenstock et al., 2017),</li>
-<li class="fragment">robustness under changes in modelling choices (Kummerfeld &amp; Zollman, 2016; Frey &amp; Šešelja, 2018, 2020;</li>
+<li class="fragment">Robustness under changes in parameter settings (<span class="citation" data-cites="rosenstockEpistemicNetworksLess2017">Rosenstock, Bruner, and O’Connor (<a href="#/literature" role="doc-biblioref" onclick="">2017</a>)</span>),</li>
+<li class="fragment">Robustness under changes in modelling choices (<span class="citation" data-cites="kummerfeldConservatismScientificState2016">Kummerfeld and Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2016</a>)</span>; <span class="citation" data-cites="freyWhatEpistemicFunction2018">Frey and Šešelja (<a href="#/literature" role="doc-biblioref" onclick="">2018</a>)</span>; <span class="citation" data-cites="freyRobustnessIdealizationsAgentBased2020">Frey and Šešelja (<a href="#/literature" role="doc-biblioref" onclick="">2020</a>)</span>)</li>
 </ul></li>
-<li class="fragment">A strand on conformity: (Zollman, 2010; Mohseni &amp; Williams, 2021; Weatherall &amp; O’Connor, 2021; Fazelpour &amp; Steel, 2022)</li>
-<li class="fragment">A strand on epistemically impure agents (including financial interests) (Holman &amp; Bruner, 2015; Weatherall, O’Connor &amp; Bruner, 2020)</li>
-</ul></li>
-<li class="fragment">Our work complements this literature in at least two ways
-<ul>
-<li class="fragment">we focus on the degree equality effect</li>
-<li class="fragment">we study empirically sensitive robustness</li>
-</ul></li>
-</ul>
-</section>
-
-<section id="one-precursor" class="title-slide slide level1 center">
-<h1>One Precursor</h1>
-<ul>
-<li class="fragment">To the best of our knowledge there is one precursor on the degree equality effect</li>
-<li class="fragment">Zollman (2007, Sect. 3.1) finds that
-<ul>
-<li class="fragment">the wheel does better than the complete network, which suggests that degree-inequality might be epistemically beneficial.</li>
-<li class="fragment">However, since the cycle does better than the wheel, he concludes that low connectivity (not degree-inequality) produces the epistemic benefits.</li>
-</ul></li>
-<li class="fragment">Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.</li>
-<li class="fragment">Our results:
-<ul>
-<li class="fragment">confirm Zollman’s finding on our artificial networks</li>
-<li class="fragment">but disconfirms Zollman’s finding on empirical networks</li>
-</ul></li>
+<li class="fragment">A strand on conformity: (<span class="citation" data-cites="zollmanSocialStructureEffects2010">Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2010b</a>)</span>; <span class="citation" data-cites="mohseniTruthConformityNetworks2021">Mohseni and Williams (<a href="#/literature" role="doc-biblioref" onclick="">2021</a>)</span>; <span class="citation" data-cites="weatherallConformityScientificNetworks2021">Weatherall and O’Connor (<a href="#/literature" role="doc-biblioref" onclick="">2021</a>)</span>; <span class="citation" data-cites="fazelpourDiversityTrustConformity2022">Fazelpour and Steel (<a href="#/literature" role="doc-biblioref" onclick="">2022</a>)</span>)</li>
+<li class="fragment">A strand on epistemically impure agents (including financial interests) (<span class="citation" data-cites="holmanProblemIntransigentlyBiased2015">Holman and Bruner (<a href="#/literature" role="doc-biblioref" onclick="">2015</a>)</span>; <span class="citation" data-cites="weatherallHowBeatScience2020">Weatherall, O’Connor, and Bruner (<a href="#/literature" role="doc-biblioref" onclick="">2020</a>)</span>)</li>
+<li class="fragment">Our work: Empirically guided robustness tests.</li>
 </ul>
 </section>
 
 <section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+<div class="image-container" width="100%" data-fig-align="center">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/zollman_graph.png" class="remove_background quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<p>Main network-types used in <span class="citation" data-cites="zollmanCommunicationStructureEpistemic2007">Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2007</a>)</span></p>
+</section>
+
+<section id="section-2" class="title-slide slide level1 center">
+<h1></h1>
+<div class="image-container" width="100%" data-fig-align="center">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rosenstock_n_agents.png" class="remove_background quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<p>Convergence as a function of network-size – <span class="citation" data-cites="rosenstockEpistemicNetworksLess2017">Rosenstock, Bruner, and O’Connor (<a href="#/literature" role="doc-biblioref" onclick="">2017</a>)</span></p>
+</section>
+
+<section id="section-3" class="title-slide slide level1 center">
+<h1></h1>
+<p><em>“As a result, we cannot say with confidence that we expect real world epistemic communities to generally fall under the area of parameter space where the Zollman effect occurs. We are unsure whether they correspond to this area of parameter space, or some other area, or some other models with different assumptions.”</em> – <span class="citation" data-cites="rosenstockEpistemicNetworksLess2017">Rosenstock, Bruner, and O’Connor (<a href="#/literature" role="doc-biblioref" onclick="">2017</a>)</span></p>
+<!-- <span class="highlight"> Degree Distribution </span> -->
+</section>
+
+<section id="section-4" class="title-slide slide level1 center" data-background-color="#ededed" data-background-image="images/circle_graph_background.png" data-background-opacity=".5">
+<h1></h1>
+<div class="r-fit-text">
+<p>But what are the appropriate</p>
+</div>
+<div class="r-fit-text">
+<p><span class="highlight">networks</span> to test for the effect?</p>
+</div>
+</section>
+
+<section id="section-5" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>Approach 1: Artificial Networks</p>
+</div>
+</section>
+
+<section id="section-6" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/network_comparison.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+<div class="r-fit-text">
+<p>Some candidates for more realistic networks</p>
+</div>
+</section>
+
+<section id="section-7" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>But how to evaluate the influence of specific network structures?</p>
+</div>
+<div class="r-fit-text fragment">
+<p>Rewiring!</p>
+</div>
+</section>
+
+<section id="section-8" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/watts-strogatz-demo.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Changing network-structure through randomization</p>
+<p>(E. g. Watts-Strogatz-graph)</p>
+</section>
+
+<section id="parameters" class="title-slide slide level1 scrollable nostretch center">
+<h1>Parameters</h1>
+<div style="font-size: 24pt;">
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 32%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Type/Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of Agents</td>
+<td>11 to 200</td>
+<td>Number of agents in the network</td>
+</tr>
+<tr class="even">
+<td>BA-Degree</td>
+<td>2 to 10</td>
+<td>Degree for the Barabási-Albert (BA) model</td>
+</tr>
+<tr class="odd">
+<td>ER-Probability</td>
+<td>0 to 0.25</td>
+<td>Probability for edge creation in the Erdos-Renyi (ER) graph model</td>
+</tr>
+<tr class="even">
+<td>Rewiring probability</td>
+<td>0 to 1</td>
+<td>Probability of rewiring in the network generated</td>
+</tr>
+<tr class="odd">
+<td>Uncertainty</td>
+<td>0.001 to 0.01</td>
+<td>Probability-difference between the theories. (Smaller: harder problem)</td>
+</tr>
+<tr class="even">
+<td>n-experiments</td>
+<td>10 to 100</td>
+<td>Number of experiments to run each round (Smaller: Less information collected)</td>
+</tr>
+<tr class="odd">
+<td>Network-type</td>
+<td>‘ba’, ‘sf’, ‘ws’</td>
+<td>Type of network (‘ba’: Barabási-Albert, ‘sf’: directed Scale-Free, ‘ws’: Watts-Strogatz)</td>
+</tr>
+<tr class="even">
+<td>Agent-type</td>
+<td>‘bayesian’, ‘beta’</td>
+<td>We currently implement two agent types: The original bayesian one, and a beta-distribution based Thompson-sampler.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="section-9" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bayes_agent_BA_graph_dat.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<p><strong>Results: Bayesian-learner &amp; Barabási-Albert:</strong> In nearly all simulations, basically all agents learn the correct method.</p>
+</section>
+
+<section id="model-fit-bayesian-learner-barabási-albert" class="title-slide slide level1 center">
+<h1>Model-fit: Bayesian-learner &amp; Barabási-Albert</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="op">===============================================</span> <span class="op">==========================================================</span></span>
+<span id="cb1-2"><a href=""></a>Distribution:                        NormalDist Effective DoF:                                     <span class="fl">19.5321</span></span>
+<span id="cb1-3"><a href=""></a>Link Function:                     IdentityLink Log Likelihood:                               <span class="op">-</span><span class="fl">298574.6004</span></span>
+<span id="cb1-4"><a href=""></a>Number of Samples:                          <span class="dv">990</span> AIC:                                            <span class="fl">597190.265</span></span>
+<span id="cb1-5"><a href=""></a>                                                AICc:                                           <span class="fl">597191.178</span></span>
+<span id="cb1-6"><a href=""></a>                                                GCV:                                                <span class="fl">0.0017</span></span>
+<span id="cb1-7"><a href=""></a>                                                Scale:                                              <span class="fl">0.0016</span></span>
+<span id="cb1-8"><a href=""></a>                                                Pseudo R<span class="op">-</span>Squared:                                    <span class="fl">0.145</span></span>
+<span id="cb1-9"><a href=""></a><span class="op">==========================================================================================================</span></span>
+<span id="cb1-10"><a href=""></a>Feature Function                  Lambda               Rank         EDoF         P <span class="op">&gt;</span> x        Sig. Code   </span>
+<span id="cb1-11"><a href=""></a><span class="op">=================================</span> <span class="op">====================</span> <span class="op">============</span> <span class="op">============</span> <span class="op">============</span> <span class="op">============</span></span>
+<span id="cb1-12"><a href=""></a>Probability of Rewiring           [<span class="fl">0.6</span>]                <span class="dv">6</span>            <span class="fl">4.2</span>          <span class="fl">7.09e-01</span>                 </span>
+<span id="cb1-13"><a href=""></a>Uncertainty Level                 [<span class="fl">0.6</span>]                <span class="dv">6</span>            <span class="fl">3.2</span>          <span class="fl">2.88e-02</span>     <span class="op">*</span>           </span>
+<span id="cb1-14"><a href=""></a>Number of Experiments             [<span class="fl">0.6</span>]                <span class="dv">6</span>            <span class="fl">3.2</span>          <span class="fl">6.98e-01</span>                 </span>
+<span id="cb1-15"><a href=""></a>Mean Degree                       [<span class="fl">0.6</span>]                <span class="dv">6</span>            <span class="fl">3.3</span>          <span class="fl">1.11e-16</span>     <span class="op">***</span>         </span>
+<span id="cb1-16"><a href=""></a>BA<span class="op">-</span>Degree                         [<span class="fl">0.6</span>]                <span class="dv">6</span>            <span class="fl">2.6</span>          <span class="fl">1.11e-16</span>     <span class="op">***</span>         </span>
+<span id="cb1-17"><a href=""></a>Number of Agents                  [<span class="fl">0.6</span>]                <span class="dv">6</span>            <span class="fl">3.0</span>          <span class="fl">1.50e-05</span>     <span class="op">***</span>         </span>
+<span id="cb1-18"><a href=""></a>Intercept                                              <span class="dv">1</span>            <span class="fl">0.0</span>          <span class="fl">1.11e-16</span>     <span class="op">***</span>         </span>
+<span id="cb1-19"><a href=""></a><span class="op">==========================================================================================================</span></span>
+<span id="cb1-20"><a href=""></a>Significance codes:  <span class="dv">0</span> <span class="st">'***'</span> <span class="fl">0.001</span> <span class="st">'**'</span> <span class="fl">0.01</span> <span class="st">'*'</span> <span class="fl">0.05</span> <span class="st">'.'</span> <span class="fl">0.1</span> <span class="st">' '</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+
+<section id="section-10" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bayes_agent_BA_graph_gam.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<p><strong>Predicting Quality:</strong> Messing with the hierarchical-ness of the network (prob-rewiring) doesnt seem to make much difference, when predicting the share of <span class="highlight"> correct agents </span> at convergence.</p>
+</section>
+
+<section id="section-11" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bayes_agent_BA_graph_gam_convergence.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<p><strong>Predicting Speed:</strong> Probability of rewiring also doesn’t influence convergence-time, which is determined by the usual suspects (problem difficulty, number of experiments, degree)</p>
+</section>
+
+<section id="section-12" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>These results are very similar for all tested network-types!</p>
+</div>
+<div class="fragment">
+<div class="r-fit-text">
+<p>We don’t find an reliability</p>
+</div>
+<div class="r-fit-text">
+<p>advantage for sparser networks.</p>
+</div>
+</div>
+<div class="fragment highlight">
+<div class="r-fit-text">
+<p>We don’t find an influence</p>
+</div>
+<div class="r-fit-text">
+<p>of rewiring network-structure.</p>
+</div>
+</div>
+</section>
+
+<section id="section-13" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>Approach 2: Real Networks</p>
+</div>
+</section>
+
+<section id="motivation" class="title-slide slide level1 center">
+<h1>Motivation:</h1>
+<ul>
+<li class="fragment">There are several examples of sub-optimal processes in the history of science.</li>
+<li class="fragment"><em>“The hypothesis that peptic ulcers are caused by bacteria did not originate with Warren and Marshall, it predates their births by more than 60 years. But, unlike other famous cases of anticipation, this theory was the subject of significant scientific scrutiny during that time. To those who have faith in the scientific enterprise, it should come as a surprise that the widespread acceptance of a now well supported theory should take so long.”</em> – <span class="citation" data-cites="zollmanEpistemicBenefitTransient2010">Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2010a</a>)</span></li>
+<li class="fragment">Our current Examples: Peptic Ulcer (n= 133403, – 1978) &amp; Perceptron (n= 3519, – 1979)</li>
+<li class="fragment">Author-based citation-network collected from OpenAlex</li>
+</ul>
+</section>
+
+<section id="the-perceptron-network" class="title-slide slide level1 center" data-background-image="images/perceptron_graph_randomized_p=0.png">
+<h1>The Perceptron network</h1>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+</section>
+
+<section id="section-14" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/perceptron_graph_randomized_p=0_powerlaw_fit.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Degree-distribution of the perceptron-network (n=3519).</p>
+</section>
+
+<section id="the-perceptron-network-randomly-rewired" class="title-slide slide level1 center" data-background-image="images/perceptron_graph_randomized_p=0.2.png">
+<h1>The Perceptron network (randomly rewired)</h1>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+</section>
+
+<section id="section-15" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/perceptron_graph_randomized_p=0.2_powerlaw_fit.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Degree-distribution after random rewiring (p=.2), moving towards a normal degree distribution. Rewiring does not change the mean degree.</p>
+</section>
+
+<section id="results-perceptron---quality" class="title-slide slide level1 center">
+<h1>Results: Perceptron - Quality</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/perceptron_bayesagent_share_at_convergence.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Share of correctly informed (bayesian) agents at convergence depending on varied parameters.</p>
+</section>
+
+<section id="results-perceptron---quality-1" class="title-slide slide level1 center">
+<h1>Results: Perceptron - Quality</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/perceptron_graph_randomized_partial_dependence_share_corr_agents.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Isolated dependencies of the <span class="highlight"> correctness of agents</span> on varied parameters. Probability of rewiring seems to strongly drive outcomes!</p>
+</section>
+
+<section id="results-perceptron---speed" class="title-slide slide level1 center">
+<h1>Results: Perceptron - Speed</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/perceptron_bayesagent_log_convergence_steps.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+
+<section id="results-perceptron---speed-1" class="title-slide slide level1 center">
+<h1>Results: Perceptron - Speed</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/perceptron_graph_randomized_partial_dependence_convergence_time_log.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+
+<section id="section-16" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>Tentative Results</p>
+</div>
+</section>
+
+<section id="section-17" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>Using more sophisticated</p>
+</div>
+<div class="r-fit-text">
+<p>network-models doesn’t end</p>
+</div>
+<div class="r-fit-text">
+<p>original robustness worries.</p>
+</div>
+<div class="fragment highlight">
+<div class="r-fit-text">
+<p>But network-structure clearly <em>does</em> matter,</p>
+</div>
+<div class="r-fit-text">
+<p>as we find real, suboptimal networks!</p>
+</div>
+</div>
+</section>
+
+<section id="discussion" class="title-slide slide level1 center">
+<h1>Discussion</h1>
+<ul>
+<li class="fragment">Why does randomization affect our empirical, but not our artificial networks?</li>
+<li class="fragment">Are there better network-models that reproduce this effect, e. g. more clustered ones?</li>
+<li class="fragment">What about other rewiring techniques (e.g.&nbsp;increasing pref. attachement)?</li>
+<li class="fragment">How to adequately represent empirical networks?</li>
+<li class="fragment">Vary other aspects of networks – E. g. connectivity (c.f. <span class="citation" data-cites="zollmanCommunicationStructureEpistemic2007">Zollman (<a href="#/literature" role="doc-biblioref" onclick="">2007</a>)</span>, 3.1) vs.&nbsp;degree-inequality?</li>
+</ul>
+<!-- 
+# Network epistemology
+* Kicked off by Zollman (2007, 2010) who uses agent-based modelling and simulations
+* Main findings:
+    - Less connectivity can lead to more reliable groups
+    - There is a robust tradeoff between speed of convergence and reliability
+* The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups  -->
+<!-- # Scale-free networks
+* The existing literature typically focuses on three simplistic network structures: the cycle, wheel and complete network [INSERT PICTURES?]
+* The epistemic value of modelling and simulations depends heavily on their empirical adequacy
+* But, these simplistic network structures are rarely observed in the real world
+* Real-world networks are often/virtually always *scale-free*: 
+    - their degree distribution follows a power law (which is highly unequal)
+* Our focus is on the *degree-equality effect*:
+    - whether and when higher levels of degree equality leads to epistemically better groups
+
+[INSERT PICTURE OR EXAMPLE OF A SCALE-FREE NETWORK?]
+
+# Empirically sensitive robustness
+* The overall aim of our study is to see whether and when the degree-equality effect is robust in an empirically sensitive way
+* We aim to address three challenges:
+    - Existing work in network epistemology focuses on small networks (typically up to 10 agents) whereas real scientific networks are much larger
+    - Existing work in network epistemology focus on simple network structures even though virtually all empirical networks are scale-free
+    - There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks
+* We propose a two-pronged analysis by analysing both (a) artificial networks *and* (b) empirical networks -->
+<!-- 
+# Main points
+* There is a significant effect of randomizing, on empirical networks. This is one philosophical conversation.
+* There does not seem to be an effect in randomizing, for generated/simulated networks. This is another philosophical conversation.
+
+# Methods
+We simulate a very specific philsci scenario, namely when the community has a default theory and there is a competitor entering the game. Also this is tied to the philosophical examples we picked.
+We consider randomizing networks as the main method.
+We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness) -->
+<!-- 
+
+We run simulations on empirical networks.
+
+
+# Results on Simulated Networks (~ 2 slides)
+
+Show results (pretty plots are valuable here), namely now effect. (We can try a few more simulations here too)
+Brief discussion on the fact that the parameter space is too big, and the simulated networks can be very different from real life networks.
+
+# Results on Empirical Networks (~ 5 slides)
+
+Explain the two case studies that we selected, and why.
+Show visualizations of the networks, and the loglog plots. Emphasize how unequally distributed they are.
+Show pretty plots of the results.
+Brief discussion of what might explain the effects, as a segway to the next section.
+
+# Discussion (~5 slides)
+Proper discussion on what explains the effects, how robust the results are, and how to move forward with the research question. 
+I am not entirely sure what explains the effects.
+Proper discussion of the fact that how possibly explanations might be deceiving, and that empirically informed approaches are better.
+
+ -->
+<!-- #
+![](images/%E2%80%8ESFI%20AGWCSS.%E2%80%8E001.png){width=130% fig-align="center"} -->
+<!-- 
+
+# One Precursor
+
+* To the best of our knowledge there is one precursor on the degree equality effect
+* Zollman (2007, Sect. 3.1) finds that 
+    - the wheel does better than the complete network, which suggests that degree-inequality might be epistemically beneficial. 
+    - However, since the cycle does better than the wheel, he concludes that low connectivity (not degree-inequality) produces the epistemic benefits. 
+* Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.
+* Our results:
+    - confirm Zollman’s finding on our artificial networks
+    - but disconfirms Zollman’s finding on empirical networks -->
+</section>
+
+<section id="section-18" class="title-slide slide level1 center">
 <h1></h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -604,9 +917,51 @@
 Thank you!
 </h1>
 </div>
+</section>
+
+<section id="literature" class="title-slide slide level1 smaller scrollable">
+<h1>Literature</h1>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-fazelpourDiversityTrustConformity2022" class="csl-entry" role="listitem">
+Fazelpour, Sina, and Daniel Steel. 2022. <span>“Diversity, Trust, and Conformity: A Simulation Study.”</span> <em>Philosophy of Science</em> 89 (2): 209–31. <a href="https://doi.org/10.1017/psa.2021.25">https://doi.org/10.1017/psa.2021.25</a>.
+</div>
+<div id="ref-freyWhatEpistemicFunction2018" class="csl-entry" role="listitem">
+Frey, Daniel, and Dunja Šešelja. 2018. <span>“What <span>Is</span> the <span>Epistemic Function</span> of <span>Highly Idealized Agent-Based Models</span> of <span>Scientific Inquiry</span>?”</span> <em>Philosophy of the Social Sciences</em> 48 (4): 407–33. <a href="https://doi.org/10.1177/0048393118767085">https://doi.org/10.1177/0048393118767085</a>.
+</div>
+<div id="ref-freyRobustnessIdealizationsAgentBased2020" class="csl-entry" role="listitem">
+———. 2020. <span>“Robustness and <span>Idealizations</span> in <span>Agent-Based Models</span> of <span>Scientific Interaction</span>.”</span> <em>The British Journal for the Philosophy of Science</em> 71 (4): 1411–37. <a href="https://doi.org/10.1093/bjps/axy039">https://doi.org/10.1093/bjps/axy039</a>.
+</div>
+<div id="ref-holmanProblemIntransigentlyBiased2015" class="csl-entry" role="listitem">
+Holman, Bennett, and Justin P. Bruner. 2015. <span>“The Problem of Intransigently Biased Agents.”</span> <em>Philosophy of Science</em> 82 (5): 956–68.
+</div>
+<div id="ref-kummerfeldConservatismScientificState2016" class="csl-entry" role="listitem">
+Kummerfeld, Erich, and Kevin J. S. Zollman. 2016. <span>“Conservatism and the Scientific State of Nature.”</span> <em>The British Journal for the Philosophy of Science</em> 67 (4): 1057–76. <a href="https://doi.org/10.1093/bjps/axv013">https://doi.org/10.1093/bjps/axv013</a>.
+</div>
+<div id="ref-mohseniTruthConformityNetworks2021" class="csl-entry" role="listitem">
+Mohseni, Aydin, and Cole Randall Williams. 2021. <span>“Truth and Conformity on Networks.”</span> <em>Erkenntnis</em> 86 (6): 1509–30. <a href="https://doi.org/10.1007/s10670-019-00167-6">https://doi.org/10.1007/s10670-019-00167-6</a>.
+</div>
+<div id="ref-rosenstockEpistemicNetworksLess2017" class="csl-entry" role="listitem">
+Rosenstock, Sarita, Justin Bruner, and Cailin O’Connor. 2017. <span>“In <span>Epistemic Networks</span>, <span>Is Less Really More</span>?”</span> <em>Philosophy of Science</em> 84 (2): 234–52. <a href="https://doi.org/10.1086/690717">https://doi.org/10.1086/690717</a>.
+</div>
+<div id="ref-weatherallConformityScientificNetworks2021" class="csl-entry" role="listitem">
+Weatherall, James Owen, and Cailin O’Connor. 2021. <span>“Conformity in Scientific Networks.”</span> <em>Synthese</em> 198 (8): 7257–78. <a href="https://doi.org/10.1007/s11229-019-02520-2">https://doi.org/10.1007/s11229-019-02520-2</a>.
+</div>
+<div id="ref-weatherallHowBeatScience2020" class="csl-entry" role="listitem">
+Weatherall, James Owen, Cailin O’Connor, and Justin P. Bruner. 2020. <span>“How to Beat Science and Influence People: <span>Policymakers</span> and Propaganda in Epistemic Networks.”</span> <em>The British Journal for the Philosophy of Science</em> 71 (4): 1157–86. <a href="https://doi.org/10.1093/bjps/axy062">https://doi.org/10.1093/bjps/axy062</a>.
+</div>
+<div id="ref-zollmanCommunicationStructureEpistemic2007" class="csl-entry" role="listitem">
+Zollman, Kevin J. S. 2007. <span>“The Communication Structure of Epistemic Communities.”</span> <em>Philosophy of Science</em> 74 (5): 574–87. <a href="https://doi.org/10.1086/525605">https://doi.org/10.1086/525605</a>.
+</div>
+<div id="ref-zollmanEpistemicBenefitTransient2010" class="csl-entry" role="listitem">
+———. 2010a. <span>“The Epistemic Benefit of Transient Diversity.”</span> <em>Erkenntnis</em> 72 (1): 17–35. <a href="https://doi.org/10.1007/s10670-009-9194-6">https://doi.org/10.1007/s10670-009-9194-6</a>.
+</div>
+<div id="ref-zollmanSocialStructureEffects2010" class="csl-entry" role="listitem">
+———. 2010b. <span>“Social Structure and the Effects of Conformity.”</span> <em>Synthese</em> 172 (3): 317–40. <a href="https://doi.org/10.1007/s11229-008-9393-8">https://doi.org/10.1007/s11229-008-9393-8</a>.
 </div>
 </div>
 </section>

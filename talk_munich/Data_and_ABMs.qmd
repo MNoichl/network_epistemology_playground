@@ -1,6 +1,6 @@
 ---
-title: "Something something powerlaws"
-author: "Hein Duijf, Max Noichl & Ignacio Quintaja"
+title: "Epistemology on Real Networks"
+author: "Max Noichl, Ignacio Quintana & Hein Duijf"
 institute: ""
 date: 2024-6-19
 
@@ -9,7 +9,7 @@ format:
         template-partials:
             - title-slide.html
         title-slide-attributes:
-            data-background-image: images/background_failure.png
+            data-background-image: images/background_image_front.png
             data-background-size: cover
             data-background-opacity: "1."
 
@@ -33,11 +33,11 @@ format:
                 </style>
         auto-stretch: false
         incremental: true 
-bibliography: my_lib.bib
-csl: the-journal-of-modern-history.csl
+bibliography: network_epistemology_playground_bib.bib
+# csl: the-journal-of-modern-history.csl
 cite-method: citeproc
 dependencies:
-  - "custom.scss"
+    - "custom.scss"
 controls: true
 width: 1400 # 1060
 height: 1000 # 700
@@ -48,25 +48,285 @@ max-scale: 1.6
 ---
 
 
-# General Introduction
+
+
+# Outline 
+
+* Intro: Network epistemology
+* Robustness
+* Artificial network models
+* Real networks
+* Some conclusions
+
 
 # Network epistemology
 * Traditional epistemology focuses on individual rationality 
     - What is the proper response to evidence?
-* Social epistemology broadens the perspective 
-    - What is the proper *individual* response to testimony or disagreement?
-    - Which properties of *groups* makes them better or worse epistemically?
-* Network epistemology targets the structure of communication
+* Network epistemology can target the structure of communication
     - Which communication *structures* are best?
+* Kicked off by @zollmanCommunicationStructureEpistemic2007 who uses agent-based modelling and simulations
 
+
+# Recap: Zollman (2007)
+* Agents (scientist) evaluate two competing methods, with similar, but slightly different quality. (Bandit-problem mirroring clinical trials). They communicate their evidence on a network.
+* Agents cease evaluating methods they believe to be inferior.
+* Main findings:
+    - Less connectivity can lead to more reliable groups – **Community structure matters!**
+    - There is a tradeoff between speed of convergence and reliability
+
+#
+*"Even beyond the problem of maintaining the division of cognitive labor, this model suggests that in some circumstances there is an unintended benefit from scientists being uninformed about experimental results in their field. This is not universally beneficial, however.*
+
+*In circumstances where speed is very important or where we think that our initial estimates are likely very close to the truth, connected groups of scientist will be more reliable. On the other hand, when we want accuracy above all else, we should prefer communities made up of more isolated individuals."* – @zollmanCommunicationStructureEpistemic2007
+
+# Following these strands in Network Epistemology
+* A strand on robustness:
+    - Robustness under changes in parameter settings (@rosenstockEpistemicNetworksLess2017), 
+    - Robustness under changes in modelling choices (@kummerfeldConservatismScientificState2016; @freyWhatEpistemicFunction2018; @freyRobustnessIdealizationsAgentBased2020)
+* A strand on conformity: (@zollmanSocialStructureEffects2010; @mohseniTruthConformityNetworks2021; @weatherallConformityScientificNetworks2021; @fazelpourDiversityTrustConformity2022)
+* A strand on epistemically impure agents (including financial interests) (@holmanProblemIntransigentlyBiased2015; @weatherallHowBeatScience2020)
+* Our work: Empirically guided robustness tests.
+
+# 
+::: {.image-container width=100% fig-align="center"}
+![](images/zollman_graph.png){.remove_background  width=100% fig-align="center"}
+:::
+Main network-types used in @zollmanCommunicationStructureEpistemic2007
+
+# 
+::: {.image-container width=100% fig-align="center"}
+![](images/rosenstock_n_agents.png){.remove_background  width=100% fig-align="center"}
+:::
+Convergence as a function of network-size – @rosenstockEpistemicNetworksLess2017
+
+
+# 
+*"As a result, we cannot say with confidence that we expect real world epistemic communities to generally fall under the area of parameter space where the Zollman effect occurs. We are unsure whether they correspond to this area of parameter space, or some other area, or some other models with different assumptions."* – @rosenstockEpistemicNetworksLess2017
+
+
+<!-- <span class="highlight"> Degree Distribution </span> -->
+# {background-color="#ededed" background-image="images/circle_graph_background.png" background-opacity=.5 }
+::: {.r-fit-text}
+But what are the appropriate 
+:::
+::: {.r-fit-text}
+<span class="highlight">networks</span>  to test for the effect?
+:::
+
+#
+::: {.r-fit-text}
+Approach 1: Artificial Networks
+:::
+
+#
+![](images/network_comparison.png){width=100% fig-align="center"}
+
+::: {.r-fit-text}
+Some candidates for more realistic networks
+:::
+
+
+#
+::: {.r-fit-text}
+But how to evaluate the influence of specific network structures?
+:::
+::: {.r-fit-text .fragment}
+Rewiring!
+:::
+
+
+#
+![](images/watts-strogatz-demo.png){width=100% fig-align="center"}
+
+Changing network-structure through randomization 
+
+(E. g. Watts-Strogatz-graph)
+
+
+
+# Parameters {.scrollable .nostretch}
+
+::: {style="font-size: 24pt;"}
+| Parameter      | Type/Range                             | Description                                                        |
+|----------------|----------------------------------------|--------------------------------------------------------------------|
+| Number of Agents       | 11 to 200                              | Number of agents in the network                                    |
+| BA-Degree      | 2 to 10                                | Degree for the Barabási-Albert (BA) model       |
+| ER-Probability        | 0 to 0.25                       | Probability for  edge creation in the Erdos-Renyi (ER) graph model                    |
+| Rewiring probability     | 0 to 1                         | Probability of rewiring in the network generated |
+| Uncertainty    | 0.001 to 0.01                          | Probability-difference between the theories. (Smaller: harder problem)                          |
+| n-experiments  | 10 to 100                              | Number of experiments to run each round (Smaller: Less information collected)    |
+| Network-type   | 'ba', 'sf', 'ws'                       | Type of network ('ba': Barabási-Albert, 'sf': directed Scale-Free, 'ws': Watts-Strogatz) |
+| Agent-type | 'bayesian', 'beta' | We currently implement two agent types: The original bayesian one, and a beta-distribution based Thompson-sampler.|
+:::
+
+# 
+
+![](images/bayes_agent_BA_graph_dat.png){width=80% fig-align="center"}
+
+**Results: Bayesian-learner & Barabási-Albert:** In nearly all simulations, basically all agents learn the correct method. 
+
+# Model-fit: Bayesian-learner & Barabási-Albert
+```{.python}
+=============================================== ==========================================================
+Distribution:                        NormalDist Effective DoF:                                     19.5321
+Link Function:                     IdentityLink Log Likelihood:                               -298574.6004
+Number of Samples:                          990 AIC:                                            597190.265
+                                                AICc:                                           597191.178
+                                                GCV:                                                0.0017
+                                                Scale:                                              0.0016
+                                                Pseudo R-Squared:                                    0.145
+==========================================================================================================
+Feature Function                  Lambda               Rank         EDoF         P > x        Sig. Code   
+================================= ==================== ============ ============ ============ ============
+Probability of Rewiring           [0.6]                6            4.2          7.09e-01                 
+Uncertainty Level                 [0.6]                6            3.2          2.88e-02     *           
+Number of Experiments             [0.6]                6            3.2          6.98e-01                 
+Mean Degree                       [0.6]                6            3.3          1.11e-16     ***         
+BA-Degree                         [0.6]                6            2.6          1.11e-16     ***         
+Number of Agents                  [0.6]                6            3.0          1.50e-05     ***         
+Intercept                                              1            0.0          1.11e-16     ***         
+==========================================================================================================
+Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+# 
+![](images/bayes_agent_BA_graph_gam.png){width=80% fig-align="center"}
+
+**Predicting Quality:** Messing with the hierarchical-ness of the network (prob-rewiring) doesnt seem to make much difference, when predicting the share of <span class="highlight"> correct agents </span> at convergence.
+
+
+# 
+![](images/bayes_agent_BA_graph_gam_convergence.png){width=80% fig-align="center"}
+
+**Predicting Speed:** Probability of rewiring also doesn't influence convergence-time, which is determined by the usual suspects (problem difficulty, number of experiments, degree)
+
+
+
+
+
+
+#
+::: {.r-fit-text}
+These results are very similar for all tested network-types!
+:::
+:::{.fragment}
+::: {.r-fit-text }
+We don't find an reliability
+:::
+::: {.r-fit-text }
+advantage for sparser networks.
+:::
+:::
+:::{.fragment .highlight}
+::: {.r-fit-text }
+We don't find an influence
+:::
+::: {.r-fit-text }
+of rewiring network-structure.
+:::
+:::
+
+#
+::: {.r-fit-text}
+Approach 2: Real Networks
+:::
+
+# Motivation:
+
+* There are several examples of sub-optimal processes in the history of science.
+* *"The hypothesis that peptic ulcers are caused by bacteria did not originate with Warren and Marshall, it predates their births by more than 60 years. But, unlike other famous cases of anticipation, this theory was the subject of significant scientific scrutiny during that time. To those who have faith in the scientific enterprise, it should come as a surprise that the widespread acceptance of a now well supported theory should take so long."* – @zollmanEpistemicBenefitTransient2010
+* Our current Examples: Peptic Ulcer (n= 133403, – 1978) & Perceptron (n= 3519, – 1979)
+* Author-based citation-network collected from OpenAlex
+
+
+
+# The Perceptron network {background-image="images/perceptron_graph_randomized_p=0.png"}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+# 
+![](images/perceptron_graph_randomized_p=0_powerlaw_fit.png){width=50% fig-align="center"}
+
+Degree-distribution of the perceptron-network (n=3519).
+
+# The Perceptron network (randomly rewired) {background-image="images/perceptron_graph_randomized_p=0.2.png"}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+# 
+![](images/perceptron_graph_randomized_p=0.2_powerlaw_fit.png){width=50% fig-align="center"}
+
+Degree-distribution after random rewiring (p=.2), moving towards a normal degree distribution. Rewiring does not change the mean degree.
+
+
+
+# Results: Perceptron - Quality
+
+![](images/perceptron_bayesagent_share_at_convergence.png){width=100% fig-align="center"}
+
+Share of correctly informed (bayesian) agents at convergence depending on varied parameters. 
+
+# Results: Perceptron - Quality
+
+![](images/perceptron_graph_randomized_partial_dependence_share_corr_agents.png){width=100% fig-align="center"}
+
+Isolated dependencies of the <span class="highlight"> correctness of agents</span> on varied parameters. Probability of rewiring seems to strongly drive outcomes!
+
+
+# Results: Perceptron - Speed
+
+![](images/perceptron_bayesagent_log_convergence_steps.png){width=100% fig-align="center"}
+
+# Results: Perceptron - Speed
+
+![](images/perceptron_graph_randomized_partial_dependence_convergence_time_log.png){width=100% fig-align="center"}
+
+
+#
+::: {.r-fit-text}
+Tentative Results
+:::
+
+# 
+::: {.r-fit-text}
+Using more sophisticated
+:::
+::: {.r-fit-text}
+network-models doesn't end
+:::
+::: {.r-fit-text}
+original robustness worries.
+:::
+:::{ .fragment .highlight}
+::: {.r-fit-text}
+But network-structure clearly *does*  matter,
+:::
+::: {.r-fit-text}
+as we find real, suboptimal networks!
+:::
+:::
+
+
+# Discussion
+
+*  Why does randomization affect our empirical, but not our artificial networks?
+* Are there better network-models that reproduce this effect, e. g. more clustered ones?
+* What about other rewiring techniques (e.g. increasing pref. attachement)?
+* How to adequately represent empirical networks?
+* Vary other aspects of networks – E. g. connectivity (c.f. @zollmanCommunicationStructureEpistemic2007, 3.1) vs. degree-inequality?
+
+
+<!-- 
 # Network epistemology
 * Kicked off by Zollman (2007, 2010) who uses agent-based modelling and simulations
 * Main findings:
     - Less connectivity can lead to more reliable groups
     - There is a robust tradeoff between speed of convergence and reliability
-* The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups 
+* The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups  -->
 
-# Scale-free networks
+<!-- # Scale-free networks
 * The existing literature typically focuses on three simplistic network structures: the cycle, wheel and complete network [INSERT PICTURES?]
 * The epistemic value of modelling and simulations depends heavily on their empirical adequacy
 * But, these simplistic network structures are rarely observed in the real world
@@ -83,45 +343,15 @@ max-scale: 1.6
     - Existing work in network epistemology focuses on small networks (typically up to 10 agents) whereas real scientific networks are much larger
     - Existing work in network epistemology focus on simple network structures even though virtually all empirical networks are scale-free
     - There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks
-* We propose a two-pronged analysis by analysing both (a) artificial networks *and* (b) empirical networks
-
-#
-::: {.r-fit-text}
-Dow does <span class="highlight"> Degree Distribution </span>
-:::
-::: {.r-fit-text}
-affect the epistemic performance of
-:::
-::: {.r-fit-text}
-networked communities?
-:::
+* We propose a two-pronged analysis by analysing both (a) artificial networks *and* (b) empirical networks -->
 
 
 
-# Results table?
-::: {.column width="40%"}
 
-| | |
-|-------------------------------|--------------|
-| **Number of Samples:**                      | 350                                                       |
-| **Number of Features:**                     | 3                                                    |
-| **Effective DoF:**                          | 9.363                                                    |
-| **Log Likelihood:**                         | -3091.357                                                |
-| **AIC:**                                    | 6203.44                                                 |
-| **AICc:**                                   | 6204.136                                                 |
-| **GCV:**                                    | 0.046                                                    |
-| **Scale:**                                  | 0.044                                                    |
-| **Pseudo R-Squared:**                       | 0.853                                                    |
-:::
-::: {.column width="40%"}
-| Feature Function | SE | P > x | Sig. Code |
-|------------------|--------|------|-------|-----------|
-| **s(0)**         | 0.098748  | 0.872848  | 0.000800  | *** |
-| **s(1)**         | 0.029018  | 0.654016  | 0.000000  | *** |
-| **s(2)**         | 0.043616  | 0.644693  | 0.000000  | *** |
-| **s(3)**         | 0.043630  | 0.770473  | 0.000000  | *** |
-:::
 
+
+
+<!-- 
 # Main points
 * There is a significant effect of randomizing, on empirical networks. This is one philosophical conversation.
 * There does not seem to be an effect in randomizing, for generated/simulated networks. This is another philosophical conversation.
@@ -129,8 +359,8 @@ networked communities?
 # Methods
 We simulate a very specific philsci scenario, namely when the community has a default theory and there is a competitor entering the game. Also this is tied to the philosophical examples we picked.
 We consider randomizing networks as the main method.
-We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness)
-
+We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness) -->
+<!-- 
 
 We run simulations on empirical networks.
 
@@ -152,7 +382,7 @@ Proper discussion on what explains the effects, how robust the results are, and 
 I am not entirely sure what explains the effects.
 Proper discussion of the fact that how possibly explanations might be deceiving, and that empirically informed approaches are better.
 
-
+ -->
 
 
 
@@ -161,16 +391,7 @@ Proper discussion of the fact that how possibly explanations might be deceiving,
 
 
 
-# Previous Work in Network Epistemology
-* The literature on network epistemology can be (roughly) divided into:
-    - A strand on robustness:
-        - robustness under changes in parameter settings (Rosenstock et al., 2017), 
-        - robustness under changes in modelling choices (Kummerfeld & Zollman, 2016; Frey & Šešelja, 2018, 2020; 
-    - A strand on conformity: (Zollman, 2010; Mohseni & Williams, 2021; Weatherall & O’Connor, 2021; Fazelpour & Steel, 2022)
-    - A strand on epistemically impure agents (including financial interests) (Holman & Bruner, 2015; Weatherall, O’Connor & Bruner, 2020)
-* Our work complements this literature in at least two ways
-    - we focus on the degree equality effect
-    - we study empirically sensitive robustness
+<!-- 
 
 # One Precursor
 
@@ -181,7 +402,7 @@ Proper discussion of the fact that how possibly explanations might be deceiving,
 * Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.
 * Our results:
     - confirm Zollman’s finding on our artificial networks
-    - but disconfirms Zollman’s finding on empirical networks
+    - but disconfirms Zollman’s finding on empirical networks -->
 
 
 
@@ -194,3 +415,4 @@ Proper discussion of the fact that how possibly explanations might be deceiving,
 <h1>Thank you!</h1>
 </div>
 
+# Literature
