@@ -98,7 +98,7 @@ class Model:
         iterable = range(number_of_steps)
 
         if show_bar:
-            iterable = tqdm.tqdm_notebook(iterable)
+            iterable = tqdm.tqdm(iterable)
 
         alternative_stop = False
         self.conclusion_alternative_stop = False
