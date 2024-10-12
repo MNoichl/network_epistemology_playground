@@ -1,0 +1,2 @@
+n_agents,p_rewiring,uncertainty,n_experiments,rewiring_type,mean_degree,avg_clustering,degree_variance,density,avg_short_path_lenght,true_consensus,convergence_step,agent_type
+3519,0.5457416336031825,0.007184652610728739,1886,randomize,4.346121057118499,0.014229606901438001,65.54077863029269,0.0006176977056734649,0,0.7479397556123899,31,beta
