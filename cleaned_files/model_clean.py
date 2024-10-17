@@ -34,7 +34,7 @@ class Model:
         agent_type: str,
         uncertainty: float = None,
         p_theories: list = None,
-        tolerance = 1e-03,
+        tolerance = 1e-05,
         *args,
         **kwargs
     ):
