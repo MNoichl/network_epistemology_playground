@@ -1,6 +1,7 @@
 
 import dill
 import numpy as np
+import random
 from network_utils import network_statistics, geometric_soft_configuration_graph_connected
 
 
