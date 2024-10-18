@@ -60,7 +60,7 @@ def generate_parameters_randomization(_):
 
 
 # Use dill to deserialize the graph from a file
-with open('./getting_networks/perceptron_graph_pre_1979.pkl', 'rb') as f:
+with open('perceptron_graph_pre_1979.pkl', 'rb') as f:
     G_perceptron = dill.load(f)
 
 def generate_parameters_randomization_v2(_):
