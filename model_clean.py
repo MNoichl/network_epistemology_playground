@@ -98,7 +98,7 @@ class Model:
         iterable = range(number_of_steps)
 
         if show_bar:
-            iterable = tqdm.tqdm_notebook(iterable)
+            iterable = tqdm.tqdm(iterable)
 
         alternative_stop = False
         self.conclusion_alternative_stop = False
@@ -119,7 +119,7 @@ class Model:
                 break
             self.conclusion = true_consensus_condition(credences_post)  # We should set this even if we don't break, right??? - MN
         
-        #self.add_agent_history()
+        self.add_agent_history()
             
 
     def step(self):

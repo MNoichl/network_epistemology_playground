@@ -73,7 +73,7 @@ def randomized_barabasi_albert_graph(n_nodes,n_edges_to_add,randomization_probab
     G = nx.barabasi_albert_graph(n_nodes, n_edges_to_add)
     return randomize_network_v2(G, randomization_probability)
 
-def randomize_network_v2(G, p_rewiring):   
+def randomize_network(G, p_rewiring):   
     edges = list(G.edges()).copy()
     rd.shuffle(edges)
     edges_set = set(edges)
