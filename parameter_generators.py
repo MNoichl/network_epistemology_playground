@@ -1,5 +1,6 @@
 
 import dill
+import numpy as np
 from network_utils import network_statistics, geometric_soft_configuration_graph_connected
 
 
