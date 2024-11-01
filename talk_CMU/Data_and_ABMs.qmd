@@ -1,0 +1,465 @@
+---
+title: "Towards Empirical Robustness <br> in Network Epistemology"
+author: "Max Noichl, Ignacio Quintana & Hein Duijf"
+institute: ""
+date: 2024-10-25
+
+format: 
+    revealjs:
+        template-partials:
+            - title-slide.html
+        title-slide-attributes:
+            data-background-image: images/background_image_front.png
+            data-background-size: cover
+            data-background-opacity: "1."
+
+        theme: [default, custom.scss]
+        navigation-mode: vertical
+        include-in-header:  
+            text: |
+                <style>
+                .center-xy {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                width: auto; /* Maintain aspect ratio */
+                height: auto; /* Maintain aspect ratio */
+                box-sizing: border-box; /* Include padding/border in size */
+                max-height: none;
+                }
+                </style>
+        auto-stretch: false
+        incremental: true 
+bibliography: my_lib.bib
+# csl: the-journal-of-modern-history.csl
+cite-method: citeproc
+dependencies:
+    - "custom.scss"
+controls: true
+width: 1400 # 1060
+height: 1000 # 700
+margin: 0.15 # 1
+min-scale: 0.2
+max-scale: 1.6
+# background-image: "images/background_egg.png"
+---
+
+#
+
+![](images/talk_cmu_qrcode.png){width=40% fig-align="center"}
+
+:::{.r-stack}
+[https://tinyurl.com/2r72fbm9](https://tinyurl.com/2r72fbm9)
+:::
+
+
+# Outline 
+
+* Intro: Network epistemology
+* Robustness
+* How to align empirical and simulated networks?
+* Some results
+* *Work in progress!*
+
+
+# Network epistemology
+* Traditional epistemology focuses on individual rationality 
+    - What is the proper response to evidence?
+* Network epistemology can target the structure of communication
+    - Which communication *structures* are best?
+* First main results by @zollmanCommunicationStructureEpistemic2007 who uses agent-based modelling and simulations
+
+
+# Recap: Zollman (2007, 2010)
+* Agents (scientists) evaluate two competing methods, with similar, but slightly different quality. (Bandit-problem mirroring clinical trials). They communicate their evidence on a network.
+* Agents cease evaluating methods they believe to be inferior.
+* Main findings:
+    - Less connectivity can lead to more reliable groups – **Community structure matters!**
+    - There is a trade-off between speed of convergence and reliability
+
+
+# 
+
+::: {.image-container width=100% fig-align="center"}
+![](images/Zollman_2007_accuracy_vs_speed.png){.remove_background width=70% fig-align="center"}
+:::
+
+Accuracy vs. Speed – @zollmanCommunicationStructureEpistemic2007
+
+
+#
+*"Even beyond the problem of maintaining the division of cognitive labor, this model suggests that in some circumstances there is an unintended benefit from scientists being uninformed about experimental results in their field. This is not universally beneficial, however.*
+
+*In circumstances where speed is very important or where we think that our initial estimates are likely very close to the truth, connected groups of scientist will be more reliable. On the other hand, when we want accuracy above all else, we should prefer communities made up of more isolated individuals."* – @zollmanCommunicationStructureEpistemic2007
+
+# Following these strands in Network Epistemology
+* A strand on robustness:
+    - Robustness under changes in parameter settings (@rosenstockEpistemicNetworksLess2017), 
+    - Robustness under changes in modelling choices (@kummerfeldConservatismScientificState2016; @freyWhatEpistemicFunction2018a; @freyRobustnessIdealizationsAgentBased2020; @freyWhatEpistemicFunction2018; @jonardGroupProblemSolving2024)
+* A strand on conformity: (@zollmanSocialStructureEffects2010; @mohseniTruthConformityNetworks2021; @weatherallConformityScientificNetworks2021; @fazelpourDiversityTrustConformity2022)
+* A strand on epistemically impure agents (including financial interests) (@holmanProblemIntransigentlyBiased2015; @weatherallHowBeatScience2020)
+* Our work: Empirically guided robustness tests.
+
+# 
+::: {.image-container width=100% fig-align="center"}
+![](images/zollman_graph.png){.remove_background  width=100% fig-align="center"}
+:::
+Main network-types used in @zollmanCommunicationStructureEpistemic2007
+
+# 
+::: {.image-container width=100% fig-align="center"}
+![](images/rosenstock_n_agents.png){.remove_background  width=100% fig-align="center"}
+:::
+Convergence as a function of network-size – @rosenstockEpistemicNetworksLess2017
+
+
+# 
+*"As a result, we cannot say with confidence that we expect real world epistemic communities to generally fall under the area of parameter space where the Zollman effect occurs. We are unsure whether they correspond to this area of parameter space, or some other area, or some other models with different assumptions."* – @rosenstockEpistemicNetworksLess2017
+
+
+# 
+::: {.r-fit-text}
+But we care about 
+:::
+::: {.r-fit-text}
+<span class="highlight smallcaps">real world</span>
+:::
+::: {.r-fit-text}
+epistemic communities!
+:::
+
+
+<!-- # {background-color="#ededed" background-image="images/circle_graph_background.png" background-opacity=.5 }
+::: {.r-fit-text}
+But what are the appropriate 
+:::
+::: {.r-fit-text}
+<span class="highlight">networks</span>  to test for the effect?
+:::
+
+ -->
+
+# How to choose networks?
+
+* There are many potentially relevant generative network-models.
+* All have associated parameter spaces.
+* We need to find which ones fit the networks that we are actually interested in.
+* Idea: Gather some empirical networks, and try to get our candidate models to reproduce them.
+
+
+# Step 1: Empirical networks
+
+* There are several examples of sub-optimal processes in the history of science.
+* *"The hypothesis that peptic ulcers are caused by bacteria did not originate with Warren and Marshall, it predates their births by more than 60 years. But, unlike other famous cases of anticipation, this theory was the subject of significant scientific scrutiny during that time. To those who have faith in the scientific enterprise, it should come as a surprise that the widespread acceptance of a now well supported theory should take so long."* – @zollmanEpistemicBenefitTransient2010
+* Our current Examples: Peptic Ulcer (n= 2360, – 1978) & Perceptron (n= 943, – 1979)
+* Author based citation-network collected from OpenAlex, identical agents merged, undirected(!).
+
+# {background-image="images/perceptron_graph_randomized_p=0.png"}
+
+::: {.author}
+<span class="smallcaps" style="font-size: 1.5em;">the <span class="highlight">perceptron</span> network</span>
+:::
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+# Step 2: Try to fit candidate models
+
+* Using an optimization-framework borrowed from ML, <span class="highlight">hyperopt</span>, we try to find the parameters that produce networks similar to the ones we are interested in.
+* Similarity is defined as the MSE between the standardized network-statistics of the generated network and the empirical network.
+* We focus on the degree heterogeneity (Gini-coefficient), average clustering-coefficient, diameter and average degree.
+
+
+# Parzen tree optimization: Example
+
+* We try to fit a Holme-Kim model to an artificially generated one with parameters m=12, p=0.22.
+    * Explanation after @horganBuildingTreeStructuredParzen2023
+* First we generate 50 random samples from the parameter space...
+
+# 
+![](images/parzen_tree_optimization_initial.png){width=60% fig-align="center"}
+
+50 initial samples from the parameter space. The cross marks the true parameters.
+
+
+# 
+![](images/parzen_tree_optimization_step_50.png){width=90% fig-align="center"}
+
+Step 50: We then choose the top $\gamma$ of samples, and calculate a density estimate for their region $l(x)$, as well as the remainder, $g(x)$. We randomly sample points, and chose the point that maximizes $g(x) / l(x)$.
+
+# 
+![](images/parzen_tree_optimization_step_75.png){width=90% fig-align="center"}
+
+Step 75: We repeat the process, now using the new samples...
+
+# 
+![](images/parzen_tree_optimization_step_125.png){width=90% fig-align="center"}
+
+Step 125: ...
+
+# 
+![](images/parzen_tree_optimization_step_150.png){width=90% fig-align="center"}
+
+Step 150: ...
+
+# 
+![](images/parzen_tree_optimization_step_198.png){width=90% fig-align="center"}
+
+Step 198: ...
+
+
+# 
+![](images/parzen_tree_optimization_step_248.png){width=90% fig-align="center"}
+
+Step 248: The optimization is complete. We recovered $m ≈ 12, p ≈ 0.26$.
+
+
+
+# 
+::: {.r-fit-text}
+Now we apply this to the
+:::
+::: {.r-fit-text}
+real world networks...
+:::
+
+
+
+
+# 
+![](images/network_graphs_2x2.png){width=90% fig-align="center"}
+
+
+# 
+![](images/barabasi_albert_graph_perceptron.png){width=90% fig-align="center"}
+
+Attempt 1: Barabási-Albert model on the perceptron-network. The best recovered parameters (red) fit the empirical network (black line) very badly.
+
+## 
+![](images/barabasi_albert_graph_peptic_ulcer.png){width=90% fig-align="center"}
+
+Attempt 1: Barabási-Albert model on the peptic ulcer-network. 
+
+# 
+![](images/holme_kim_graph_perceptron.png){width=90% fig-align="center"}
+
+Attempt 2: Holme-Kim model on the perceptron-network.
+
+## 
+![](images/holme_kim_graph_peptic_ulcer.png){width=90% fig-align="center"}
+
+Attempt 2: Holme-Kim model on the peptic ulcer-network.
+
+
+# 
+![](images/watts_strogatz_graph_perceptron.png){width=90% fig-align="center"}
+
+Attempt 3: Watts-Strogatz model on the perceptron-network.
+
+## 
+![](images/watts_strogatz_graph_peptic_ulcer.png){width=90% fig-align="center"}
+
+Attempt 3: Watts-Strogatz model on the peptic ulcer-network.
+
+
+# 
+![](images/soft_configuration_graph_perceptron.png){width=90% fig-align="center"}
+
+Attempt 4: Hyperbolic geometric graph model on the perceptron-network – reasonably good fit.
+
+## 
+![](images/soft_configuration_graph_peptic_ulcer.png){width=90% fig-align="center"}
+
+Attempt 4: Hyperbolic random geometric graph model on the peptic ulcer-network. 
+
+
+
+# Summary
+
+* Hyperbolic geometric graph models appear to be the best fit for the empirical networks under consideration.
+* *Let's simulate!*
+
+
+# Running the simulations
+
+* We run simulations on 8000 random draws from the parameter space of the hyperbolic geometric graph model, as well as 1000 simulations each on the original empirical networks.
+* We vary the easiness of the problem (how similarly good the two methods are) and the number of experiments agents can conduct each round. Agents learn via updating beta-distributions, as in @zollmanEpistemicBenefitTransient2010.
+* We keep the same network-statistics as earlier as predictive variables.
+* We focus on two outcomes:
+    - The share of agents with correct knowledge at convergence.
+    - The time it takes for the simulations to converge.
+
+
+# 
+::: {.r-fit-text}
+Results
+:::
+
+# Correctness
+
+![](images/result_data_on_correctness.png){width=100% fig-align="center"}
+
+Share of agents with correct knowledge at convergence. Red dots indicate the empirical networks.
+
+# Speed
+
+![](images/result_data_on_speed.png){width=100% fig-align="center"}
+
+Simulation steps it takes for the simulations to converge. Red dots indicate the empirical networks.
+
+# Correctness vs Speed
+
+![](images/result_speed_vs_correctness.png){width=100% fig-align="center"}
+
+Share of agents with correct knowledge at convergence vs. simulation steps it takes for the simulations to converge. Red dots indicate the empirical networks.
+
+
+# Analyzing the results
+
+* Analyzing the results is tricky: We expect non-linear relationships, heteroscedasticity and multicollinearity between the network-statistics.
+* One approach: Train a machine learning model (XGBoost) to predict the outcomes of simulations, then use Shapley values to analyze the model. 
+* Shapley values decompose the predictions into contributions of individual variables.
+
+# Analysis: Correctness
+
+![](images/correctness_XGBoost_shapely_values_partial_dependence.png){width=90% fig-align="center"}
+
+Shapley values for the XGboost model predicting the speed of convergence. Higher values indicate a higher share of agents with <span class="highlight">correct estimations</span>.
+
+##  
+
+![](images/correctness_XGBoost_performance.png){width=70% fig-align="center"}
+
+Performance of the XGBoost model predicting the share of agents with correct knowledge at convergence.
+
+
+# Analysis: Speed
+
+![](images/speed_XGBoost_shapely_values_partial_dependence.png){width=90% fig-align="center"}
+
+Shapley values for the XGboost model predicting the speed of convergence. Lower values indicate that variable predicts <span class="highlight">faster convergence</span> in that range.
+
+
+## 
+
+![](images/speed_XGBoost_performance.png){width=70% fig-align="center"}
+
+Performance of the XGBoost model predicting the speed of convergence.
+
+# Summary
+
+* Network properties and size *matter*!
+* In realistic networks, the story about speed and epistemic quality trade-offs is complicated.
+* Degree heterogeneity surprisingly doesn't seem to matter much. 
+
+
+
+# Discussion
+
+* What changes once we include directedness? E.g. about the influence of degree-inequality?
+* More, and more diverse case studies!
+* Additional network models?
+
+
+
+<!-- 
+# Network epistemology
+* Kicked off by Zollman (2007, 2010) who uses agent-based modelling and simulations
+* Main findings:
+    - Less connectivity can lead to more reliable groups
+    - There is a robust tradeoff between speed of convergence and reliability
+* The ensuing literature has focused on whether and when high connectivity, convergence speed and conformity lead to epistemically better groups  -->
+
+<!-- # Scale-free networks
+* The existing literature typically focuses on three simplistic network structures: the cycle, wheel and complete network [INSERT PICTURES?]
+* The epistemic value of modelling and simulations depends heavily on their empirical adequacy
+* But, these simplistic network structures are rarely observed in the real world
+* Real-world networks are often/virtually always *scale-free*: 
+    - their degree distribution follows a power law (which is highly unequal)
+* Our focus is on the *degree-equality effect*:
+    - whether and when higher levels of degree equality leads to epistemically better groups
+
+[INSERT PICTURE OR EXAMPLE OF A SCALE-FREE NETWORK?]
+
+# Empirically sensitive robustness
+* The overall aim of our study is to see whether and when the degree-equality effect is robust in an empirically sensitive way
+* We aim to address three challenges:
+    - Existing work in network epistemology focuses on small networks (typically up to 10 agents) whereas real scientific networks are much larger
+    - Existing work in network epistemology focus on simple network structures even though virtually all empirical networks are scale-free
+    - There are few attempts to empirically calibrate theoretical findings on artificial networks towards empirical networks
+* We propose a two-pronged analysis by analysing both (a) artificial networks *and* (b) empirical networks -->
+
+
+
+
+
+
+
+<!-- 
+# Main points
+* There is a significant effect of randomizing, on empirical networks. This is one philosophical conversation.
+* There does not seem to be an effect in randomizing, for generated/simulated networks. This is another philosophical conversation.
+
+# Methods
+We simulate a very specific philsci scenario, namely when the community has a default theory and there is a competitor entering the game. Also this is tied to the philosophical examples we picked.
+We consider randomizing networks as the main method.
+We run simulations on randomly generated networks, preferential attachment (but maybe we can quickly run a few more just for completeness) -->
+<!-- 
+
+We run simulations on empirical networks.
+
+
+# Results on Simulated Networks (~ 2 slides)
+
+Show results (pretty plots are valuable here), namely now effect. (We can try a few more simulations here too)
+Brief discussion on the fact that the parameter space is too big, and the simulated networks can be very different from real life networks.
+
+# Results on Empirical Networks (~ 5 slides)
+
+Explain the two case studies that we selected, and why.
+Show visualizations of the networks, and the loglog plots. Emphasize how unequally distributed they are.
+Show pretty plots of the results.
+Brief discussion of what might explain the effects, as a segway to the next section.
+
+# Discussion (~5 slides)
+Proper discussion on what explains the effects, how robust the results are, and how to move forward with the research question. 
+I am not entirely sure what explains the effects.
+Proper discussion of the fact that how possibly explanations might be deceiving, and that empirically informed approaches are better.
+
+ -->
+
+
+
+<!-- #
+![](images/%E2%80%8ESFI%20AGWCSS.%E2%80%8E001.png){width=130% fig-align="center"} -->
+
+
+
+<!-- 
+
+# One Precursor
+
+* To the best of our knowledge there is one precursor on the degree equality effect
+* Zollman (2007, Sect. 3.1) finds that 
+    - the wheel does better than the complete network, which suggests that degree-inequality might be epistemically beneficial. 
+    - However, since the cycle does better than the wheel, he concludes that low connectivity (not degree-inequality) produces the epistemic benefits. 
+* Zollman (2007, Sect. 3.2) goes on to consider all possible networks of size 6 and finds that degree-inequality is not correlated with reliability and, hence, disconfirms the degree-inequality effect.
+* Our results:
+    - confirm Zollman’s finding on our artificial networks
+    - but disconfirms Zollman’s finding on empirical networks -->
+
+
+
+
+# 
+
+![](images/programming_owl_transparent.png){width=100% fig-align="center"}
+
+<div style="text-align: center;">
+<h1>Thank you!</h1>
+</div>
+
+# Literature

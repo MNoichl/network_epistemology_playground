@@ -1,0 +1,8 @@
+There is a conceptual, interdisciplinary approach to intellectual history, according to which it is the historian’s task to trace the history of “certain ‘unit-ideas’ as they find expression in a wide range of cultural fields from philosophic systems to literature, the other arts, the sciences, and social thought” [...] This approach, is presently enjoying a certain renaissance after a long period of disrepute. There is more than a passing indication that one of the reasons why ‘big history’ studies are witnessing a new legitimacy is the growing availability of massive amounts of digital textual sources, as well as the growing availability of computational tools and best practices for the exploration of such masses of sources.
+
+
+
+<!-- # 
+<!-- Language Distribution -->
+#
+![](images/lang_distribution_.png){ .center-xy} -->
