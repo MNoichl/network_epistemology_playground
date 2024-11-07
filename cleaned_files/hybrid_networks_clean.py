@@ -78,12 +78,14 @@ def randomize_network(G, p_rewiring):
     edges = list(G.edges()).copy()
     rd.shuffle(edges)
     edges_set = set(edges)
+    new_edges_set = edges_set
     nodes = list(G.nodes()).copy()
-    new_edges_set = set()
+    #new_edges_set = set()
     to_remove_set = set()
     for old_edge in edges:
         if rd.random() < p_rewiring:  # p probability to rewire an edge
             to_remove_set.add(old_edge)
+            new_edges_set.remove(old_edge)
             new_edge = (rd.choice(nodes),rd.choice(nodes))
             while (new_edge in new_edges_set) or (new_edge[0] == new_edge[1]):
                 new_edge = (rd.choice(nodes),rd.choice(nodes))
