@@ -92,6 +92,21 @@ def calculate_degree_gini(degrees):
     return gini_coefficient
 
 
+def alternative_calculate_degree_gini(degrees):
+    """Using numpy for speed."""
+    # Sort the degrees using numpy
+    sorted_degrees = np.sort(degrees)
+    n = len(degrees)
+    
+    # Calculate cumulative sum using numpy
+    cumsum = np.cumsum(sorted_degrees, dtype=float)
+    
+    # Simplified Gini formula using numpy operations
+    gini_coefficient = (n + 1 - 2 * np.sum((n - np.arange(n)) * sorted_degrees) / np.sum(sorted_degrees)) / n
+    
+    return gini_coefficient
+
+
 
 
 def network_statistics(G):
@@ -131,3 +146,69 @@ def network_statistics(G):
 
 
 
+def directed_network_statistics(G):
+    """
+    Computes network statistics adapted for directed graphs, handling multigraphs 
+    by converting them to simple graphs for certain calculations.
+
+    This version reports:
+    - Average degree (in/out are equal in total, so we only report one)
+    - Gini coefficients for both in-degree and out-degree distributions
+    - Average clustering coefficient of the underlying undirected version
+    - Weak diameter (diameter of the largest weakly connected component, considered undirected)
+
+    Parameters:
+    ----------
+    G : networkx.DiGraph or networkx.MultiDiGraph
+        A directed graph or directed multigraph
+
+    Returns:
+    -------
+    dict
+        Dictionary containing:
+        - 'average_degree': float
+            Average degree (in or out, they're equal)
+        - 'in_gini_coefficient': float
+            Gini coefficient of the in-degree distribution
+        - 'out_gini_coefficient': float
+            Gini coefficient of the out-degree distribution
+        - 'approx_average_clustering_coefficient': float
+            Average clustering coefficient
+        - 'weak_diameter': int
+            Diameter of the largest weakly connected component
+    """
+    stats = {}
+
+    # Get degrees
+    in_degrees = [G.in_degree(n) for n in G.nodes()]
+    out_degrees = [G.out_degree(n) for n in G.nodes()]
+    
+    # Average degree (in/out are equal in directed graphs)
+    stats['average_degree'] = sum(out_degrees) / len(out_degrees) if len(out_degrees) > 0 else 0
+
+    # Gini coefficients for both in and out degree distributions
+    stats['in_gini_coefficient'] = alternative_calculate_degree_gini(in_degrees)
+    stats['out_gini_coefficient'] = alternative_calculate_degree_gini(out_degrees)
+
+    # Convert to simple graph for clustering calculations if it's a multigraph
+    if G.is_multigraph():
+        simple_G = nx.DiGraph(G)  # Convert to simple directed graph
+    else:
+        simple_G = G
+        
+    # Get undirected version for clustering
+    undirected_G = simple_G.to_undirected()
+    stats['approx_average_clustering_coefficient'] = nx.average_clustering(undirected_G)
+
+    # Weak diameter: diameter of the largest weakly connected component (undirected)
+    if nx.is_empty(G):
+        stats['weak_diameter'] = 0
+    else:
+        largest_weak_component = max(nx.weakly_connected_components(G), key=len)
+        subgraph = G.subgraph(largest_weak_component).to_undirected()
+        if subgraph.number_of_nodes() > 1:
+            stats['weak_diameter'] = nx.diameter(subgraph)
+        else:
+            stats['weak_diameter'] = 0
+
+    return stats
